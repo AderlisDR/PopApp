@@ -1,0 +1,13 @@
+D:\Projects\PopApp\PopAppData\bin\Debug\netcoreapp3.1\PopAppCore.dll
+D:\Projects\PopApp\PopAppData\obj\Debug\netcoreapp3.1\PopAppData.csprojAssemblyReference.cache
+D:\Projects\PopApp\PopAppData\obj\Debug\netcoreapp3.1\PopAppData.AssemblyInfoInputs.cache
+D:\Projects\PopApp\PopAppData\obj\Debug\netcoreapp3.1\PopAppData.AssemblyInfo.cs
+D:\Projects\PopApp\PopAppData\bin\Debug\netcoreapp3.1\PopAppData.deps.json
+D:\Projects\PopApp\PopAppData\bin\Debug\netcoreapp3.1\PopAppData.runtimeconfig.json
+D:\Projects\PopApp\PopAppData\bin\Debug\netcoreapp3.1\PopAppData.runtimeconfig.dev.json
+D:\Projects\PopApp\PopAppData\bin\Debug\netcoreapp3.1\PopAppData.dll
+D:\Projects\PopApp\PopAppData\bin\Debug\netcoreapp3.1\PopAppData.pdb
+D:\Projects\PopApp\PopAppData\bin\Debug\netcoreapp3.1\PopAppCore.pdb
+D:\Projects\PopApp\PopAppData\obj\Debug\netcoreapp3.1\PopAppData.csproj.CopyComplete
+D:\Projects\PopApp\PopAppData\obj\Debug\netcoreapp3.1\PopAppData.dll
+D:\Projects\PopApp\PopAppData\obj\Debug\netcoreapp3.1\PopAppData.pdb

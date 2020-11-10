@@ -1,0 +1,8 @@
+D:\Projects\PopApp\PopAppCore\bin\Debug\netcoreapp3.1\PopAppCore.deps.json
+D:\Projects\PopApp\PopAppCore\bin\Debug\netcoreapp3.1\PopAppCore.dll
+D:\Projects\PopApp\PopAppCore\bin\Debug\netcoreapp3.1\PopAppCore.pdb
+D:\Projects\PopApp\PopAppCore\obj\Debug\netcoreapp3.1\PopAppCore.csprojAssemblyReference.cache
+D:\Projects\PopApp\PopAppCore\obj\Debug\netcoreapp3.1\PopAppCore.AssemblyInfoInputs.cache
+D:\Projects\PopApp\PopAppCore\obj\Debug\netcoreapp3.1\PopAppCore.AssemblyInfo.cs
+D:\Projects\PopApp\PopAppCore\obj\Debug\netcoreapp3.1\PopAppCore.dll
+D:\Projects\PopApp\PopAppCore\obj\Debug\netcoreapp3.1\PopAppCore.pdb
