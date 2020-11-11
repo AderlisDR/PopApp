@@ -31,7 +31,7 @@ namespace PopAppAPI
             services
                 .AddDbContext<PopAppContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly("PopApp.API")));
+                b => b.MigrationsAssembly("PopAppAPI")));
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
