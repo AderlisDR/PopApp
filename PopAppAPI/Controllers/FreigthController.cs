@@ -11,7 +11,7 @@ using PopApp.Core.Interfaces.Services;
 
 namespace PopAppMaster.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/freigth")]
     [ApiController]
     public class FreigthController : ControllerBase
     {

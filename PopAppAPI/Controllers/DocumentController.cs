@@ -12,7 +12,7 @@ using PopApp.Core.Interfaces.Services;
 
 namespace PopAppMaster.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/documents")]
     [ApiController]
     public class DocumentController : ControllerBase
     {
