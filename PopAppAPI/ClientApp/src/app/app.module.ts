@@ -1,11 +1,13 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 import { AbilityModule } from '@casl/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { CounterComponent } from './counter/counter.component';
@@ -19,6 +21,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthService } from './services/auth.service';
+import { TokenInterceptor } from './shared/helpers/token-interceptor';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -41,10 +48,18 @@ import { AuthService } from './services/auth.service';
     RouterModule.forRoot(AppRoutes),
     BrowserAnimationsModule,
     FontAwesomeModule,
-    AbilityModule.forRoot()
+    AbilityModule.forRoot(),
+    ReactiveFormsModule,
+    SweetAlert2Module.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    })
   ],
   providers: [
-    AuthService
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

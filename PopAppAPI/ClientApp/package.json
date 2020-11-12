@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "8.2.12",
     "@angular/platform-server": "8.2.12",
     "@angular/router": "8.2.12",
+    "@auth0/angular-jwt": "^3.0.1",
     "@casl/ability": "^3.4.0",
     "@casl/angular": "^2.1.1",
     "@fortawesome/angular-fontawesome": "^0.5.0",
@@ -30,6 +31,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "@popperjs/core": "^2.5.4",
+    "@sweetalert2/ngx-sweetalert2": "^7.3.0",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.5.3",
     "core-js": "^3.3.3",
@@ -38,6 +40,7 @@
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",
     "rxjs": "^6.5.3",
+    "sweetalert2": "^9.8.2",
     "zone.js": "0.9.1"
   },
   "devDependencies": {
