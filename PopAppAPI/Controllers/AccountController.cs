@@ -22,18 +22,16 @@ namespace PopAppAPI.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IAuthenticationServices _authenticationServices;
-        private readonly IUserServices _userServices;
 
         /// <summary>
         /// Initializes a new instance of <see cref="AccountController"/>.
         /// </summary>
         /// <param name="configuration">An implementation of <see cref="IConfiguration"/>.</param>
         /// <param name="authenticationServices">An implementation of <see cref="IAuthenticationServices"/>.</param>
-        public AccountController(IConfiguration configuration, IAuthenticationServices authenticationServices, IUserServices userServices)
+        public AccountController(IConfiguration configuration, IAuthenticationServices authenticationServices)
         {
             _configuration = configuration;
             _authenticationServices = authenticationServices;
-            _userServices = userServices;
         }
 
         [AllowAnonymous]
