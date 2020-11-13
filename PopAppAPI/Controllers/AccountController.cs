@@ -22,16 +22,18 @@ namespace PopAppAPI.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IAuthenticationServices _authenticationServices;
+        private readonly IUserServices _userServices;
 
         /// <summary>
         /// Initializes a new instance of <see cref="AccountController"/>.
         /// </summary>
         /// <param name="configuration">An implementation of <see cref="IConfiguration"/>.</param>
         /// <param name="authenticationServices">An implementation of <see cref="IAuthenticationServices"/>.</param>
-        public AccountController(IConfiguration configuration, IAuthenticationServices authenticationServices)
+        public AccountController(IConfiguration configuration, IAuthenticationServices authenticationServices, IUserServices userServices)
         {
             _configuration = configuration;
             _authenticationServices = authenticationServices;
+            _userServices = userServices;
         }
 
         [AllowAnonymous]
@@ -74,7 +76,7 @@ namespace PopAppAPI.Controllers
                 new Claim("userId", user.UserId.ToString(), ClaimValueTypes.Integer64),
                 new Claim("username", user.UserName, ClaimValueTypes.String),
                 new Claim("email", user.Email, ClaimValueTypes.String),
-                new Claim("userRole", user.UserRole.ToString(), ClaimValueTypes.Integer32)
+                new Claim("userRole", $"{(int)user.UserRole}", ClaimValueTypes.Integer32)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
