@@ -1,4 +1,4 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse sidebar-full">
   <div class="sidebar-sticky pt-3 sidenav-hold">
     <ul appDropdown class="nav flex-column sidenav">
       <li *ngFor="let item of menuItems" appDropdownLink routerLinkActive="open">
@@ -11,7 +11,7 @@
         <!-- MENU LINKS -->
         <div *ngIf="!item.disabled && item.type !== 'separator' && item.type !== 'icon'" class="lvl1">
           <!-- LINKS INSIDE APPLICATION -->
-          <a class="nav-link" routerLink="/{{item.state}}" appDropdownToggle matRipple *ngIf="item.type === 'link'">
+          <a class="nav-link" routerLink="/{{item.state}}" routerLinkActive="active" appDropdownToggle matRipple *ngIf="item.type === 'link'">
             <mat-icon>{{item.icon}}</mat-icon>
             <span class="item-name lvl1">{{item.name}}</span>
             <span fxFlex></span>
@@ -34,7 +34,7 @@
           <ul class="submenu lvl2" appDropdown *ngIf="item.type === 'dropDown'">
             <li *ngFor="let itemLvL2 of item.sub" appDropdownLink routerLinkActive="open">
               <a class="nav-link" routerLink="{{item.state ? '/'+ item.state : ''}}/{{itemLvL2.state}}"
-                appDropdownToggle matRipple *ngIf="itemLvL2.type !== 'dropDown'">
+                appDropdownToggle matRipple *ngIf="itemLvL2.type !== 'dropDown'" routerLinkActive="active">
                 <span class="item-name lvl2">{{itemLvL2.name}}</span>
                 <span fxFlex></span>
               </a>
@@ -46,7 +46,7 @@
               <!-- LEVEL 3 -->
               <ul class="submenu lvl3" appDropdown *ngIf="itemLvL2.type === 'dropDown'">
                 <li *ngFor="let itemLvL3 of itemLvL2.sub" appDropdownLink routerLinkActive="open" class="nav-item">
-                  <a class="nav-link"
+                  <a class="nav-link" routerLinkActive="active"
                     routerLink="{{item.state ? '/'+item.state : ''}}{{itemLvL2.state ? '/'+itemLvL2.state : ''}}/{{itemLvL3.state}}"
                     appDropdownToggle matRipple>
                     <span class="item-name lvl3">{{itemLvL3.name}}</span>

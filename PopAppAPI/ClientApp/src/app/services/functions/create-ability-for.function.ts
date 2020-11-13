@@ -25,10 +25,10 @@ export function createAbilityFor(role: UserRole): RawRule[] {
     switch (role) {
         case UserRole.Master:
             canSee = [
-                views.counter
+                views.all
             ];
             canNavigate = [
-                routes.counter
+                routes.all
             ];
 
             can(actions.see, canSee);
@@ -57,13 +57,6 @@ export function createAbilityFor(role: UserRole): RawRule[] {
             can(actions.navigate, canNavigate);
             break;
         default:
-            canSee = [
-                views.all
-            ];
-            canNavigate = [
-                routes.all
-            ];
-
             can(actions.see, canSee);
             can(actions.navigate, canNavigate);
             break;

@@ -21,19 +21,6 @@ export class NavigationService {
             type: 'link',
             icon: 'api',
             state: 'fetch-data'
-        },
-        {
-            name: 'Pages',
-            type: 'dropDown',
-            icon: 'web',
-            sub: [
-                {
-                    name: 'Not Found',
-                    type: 'link',
-                    icon: 'browser_not_supported',
-                    state: 'paparipo'
-                }
-            ]
         }
     ];
     menuItems = new BehaviorSubject<IMenuItem[]>(this.iconMenu);

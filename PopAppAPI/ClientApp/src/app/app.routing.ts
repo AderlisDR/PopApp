@@ -26,10 +26,6 @@ export const AppRoutes = [
                 path: 'fetch-data',
                 component: FetchDataComponent,
                 canActivate: [AuthGuard, RoleGuard]
-            },
-            {
-                path: 'paparipo',
-                component: NotFoundComponent
             }
         ]
     },
