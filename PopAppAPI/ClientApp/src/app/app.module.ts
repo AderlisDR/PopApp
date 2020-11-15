@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -15,10 +15,17 @@ import { FixedNavbarComponent } from './layouts/site-layout/fixed-navbar/fixed-n
 import { SidebarMenuComponent } from './layouts/site-layout/sidebar-menu/sidebar-menu.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
 import { StickyFooterComponent } from './layouts/site-layout/sticky-footer/sticky-footer.component';
+import { CompanyFormComponent } from './pages/company-form/company-form.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthService } from './services/auth.service';
+import {MatInputModule} from '@angular/material/input';
+import { ContainerFormComponent } from './pages/container-form/container-form.component';
+import { FreigthFormComponent } from './pages/freigth-form/freigth-form.component';
+import { ProductFormComponent } from './pages/product-form/product-form.component';
+import { UserFormComponent } from './pages/user-form/user-form.component';
+import { VesselFormComponent } from './pages/vessel-form/vessel-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +39,13 @@ import { AuthService } from './services/auth.service';
     FetchDataComponent,
     AccountLayoutComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CompanyFormComponent,
+    ContainerFormComponent,
+    FreigthFormComponent,
+    ProductFormComponent,
+    UserFormComponent,
+    VesselFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,7 +54,9 @@ import { AuthService } from './services/auth.service';
     RouterModule.forRoot(AppRoutes),
     BrowserAnimationsModule,
     FontAwesomeModule,
-    AbilityModule.forRoot()
+    AbilityModule.forRoot(),
+    MatInputModule, 
+    ReactiveFormsModule
   ],
   providers: [
     AuthService
