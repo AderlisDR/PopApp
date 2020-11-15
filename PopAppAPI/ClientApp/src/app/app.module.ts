@@ -11,6 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AbilityModule } from '@casl/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { DxDataGridModule } from 'devextreme-angular';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { AccountLayoutComponent } from './layouts/account-layout/account-layout.component';
@@ -66,7 +67,8 @@ export function tokenGetter() {
     SharedModule,
     MatIconModule,
     MatRippleModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    DxDataGridModule
   ],
   providers: [
     AuthService,
