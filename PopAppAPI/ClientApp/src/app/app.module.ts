@@ -21,6 +21,7 @@ import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component
 import { StickyFooterComponent } from './layouts/site-layout/sticky-footer/sticky-footer.component';
 import { CounterComponent } from './pages/counter/counter.component';
 import { FetchDataComponent } from './pages/fetch-data/fetch-data.component';
+import { CompanyFormComponent } from './pages/company-form/company-form.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -30,6 +31,12 @@ import { RoleGuard } from './services/guards/role.guard';
 import { NavigationService } from './services/navigation.service';
 import { TokenInterceptor } from './shared/helpers/token-interceptor';
 import { SharedModule } from './shared/shared.module';
+import {MatInputModule} from '@angular/material/input';
+import { ContainerFormComponent } from './pages/container-form/container-form.component';
+import { FreigthFormComponent } from './pages/freigth-form/freigth-form.component';
+import { ProductFormComponent } from './pages/product-form/product-form.component';
+import { UserFormComponent } from './pages/user-form/user-form.component';
+import { VesselFormComponent } from './pages/vessel-form/vessel-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -47,7 +54,13 @@ export function tokenGetter() {
     FetchDataComponent,
     AccountLayoutComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CompanyFormComponent,
+    ContainerFormComponent,
+    FreigthFormComponent,
+    ProductFormComponent,
+    UserFormComponent,
+    VesselFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,6 +69,7 @@ export function tokenGetter() {
     RouterModule.forRoot(AppRoutes),
     BrowserAnimationsModule,
     FontAwesomeModule,
+    MatInputModule, 
     AbilityModule.forRoot(),
     ReactiveFormsModule,
     SweetAlert2Module.forRoot(),

@@ -1,0 +1,42 @@
+
+<div class="card">
+  <div class="card-header text-center text-white bg-primary">Product Form</div>
+  <div class="card-body">
+
+    <form [formGroup]="productForm" (ngSubmit)="createProduct()">
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>product Name</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="productName">
+          <mat-error *ngIf="productForm.controls.productName.hasError('required')">
+            product Name is Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>product Category</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="productCategory">
+          <mat-error *ngIf="productForm.controls.productCategory.hasError('required')">
+            product Category is Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>product Description</mat-label>
+          <textarea matInput  formControlName="productDescription"></textarea>
+          <mat-error *ngIf="productForm.controls.productDescription.hasError('required')">
+            product Description is Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" [disabled]="!productForm.valid">send</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
