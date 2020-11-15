@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PopAppCore.Enums;
 
 namespace PopApp.Core.Dtos
 {
@@ -11,7 +9,7 @@ namespace PopApp.Core.Dtos
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
-        public string UserRole { get; set; }
+        public UserRole UserRole { get; set; }
         public bool IsActive { get; set; }
     }
 }

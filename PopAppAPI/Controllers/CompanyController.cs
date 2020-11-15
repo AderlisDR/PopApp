@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PopApp.Core.Dtos;
 using PopApp.Core.Entities;
 using PopApp.Core.Interfaces.Services;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PopAppMaster.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/companies")]
     [ApiController]
-    public class CompanyController : ControllerBase
+    [Authorize]
+    public sealed class CompanyController : ControllerBase
     {
         private readonly ICompanyServices _repo;
         private readonly IMapper _mapper;
