@@ -5,8 +5,8 @@
 <p *ngIf="!forecasts"><em>Loading...</em></p>
 
 <dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="forecasts"
-  [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"
-  [showBorders]="false" [allowColumnResizing]="true" (onExporting)="onExport()">
+  [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="true"
+  [showBorders]="true" [allowColumnResizing]="true" (onExporting)="onExport()">
 
   <dxo-group-panel [visible]="true" [emptyPanelText]="'Arrastre columnas aquí para agrupar'">
   </dxo-group-panel>

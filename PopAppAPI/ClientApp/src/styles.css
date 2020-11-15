@@ -54,6 +54,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   animation-delay: -1s;
 }
 
+.dx-datagrid-headers {
+  color: #fff;
+  background-color: #1b6ec2;
+  border: 2px solid #1861ac;
+  font-weight: bold;
+}
+
 @-webkit-keyframes sk-bounce {
   0%,
   100% {
