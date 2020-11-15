@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 declare let Swal: any;
 
 @Component({
@@ -9,16 +9,23 @@ declare let Swal: any;
 })
 export class FreigthFormComponent implements OnInit {
 
-  freigthForm = new FormGroup({
-    freigthCode: new FormControl('' , Validators.required),
-    freigthDescription: new FormControl('' , Validators.required),
-    freigthType: new FormControl('' , Validators.required),
-    freigthWeigth: new FormControl(0 , Validators.required)
-  });
+  freigthForm: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.formBuild();
+  }
+
+  private formBuild(){
+    this.freigthForm = this.formBuilder.group(
+      {
+        freigthCode: new FormControl('' , Validators.required),
+        freigthDescription: new FormControl('' , Validators.required),
+        freigthType: new FormControl('' , Validators.required),
+        freigthWeigth: new FormControl(0 , Validators.required)
+      }
+    );
   }
 
   //methods 
@@ -32,7 +39,7 @@ export class FreigthFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
-      console.log( 'data' ,this.freigthForm.value);
+      
       this.freigthForm.reset();
       if (result.isConfirmed) {
         Swal.fire(

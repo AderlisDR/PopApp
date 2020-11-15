@@ -1,8 +1,8 @@
 export interface User {
-    UserId: number;
-    UserName: string;
-    Email: string;
-    Password: string;
-    UserRole: string;
-    IsActive: boolean;
+    userId: number;
+    userName: string;
+    email: string;
+    password: string;
+    userRole: string;
+    isActive: boolean;
 }

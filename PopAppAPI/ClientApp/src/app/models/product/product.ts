@@ -1,7 +1,7 @@
 export interface Product {
-  ProductId: number;
-  ProductName: string;
-  ProductDescription: string;
-  ProductCategory: string;
-  IsActive: boolean;
+  productId: number;
+  productName: string;
+  productDescription: string;
+  productCategory: string;
+  isActive: boolean;
 }

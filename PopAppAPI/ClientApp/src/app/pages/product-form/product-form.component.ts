@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 declare let Swal: any;
 
 @Component({
@@ -9,15 +9,22 @@ declare let Swal: any;
 })
 export class ProductFormComponent implements OnInit {
 
-  productForm = new FormGroup({
-    productName: new FormControl('' , Validators.required),
-    productDescription: new FormControl('' , Validators.required),
-    productCategory: new FormControl('' , Validators.required),
-  });
+  productForm: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.formBuild();
+  }
+
+  private formBuild(){
+    this.productForm = this.formBuilder.group(
+      {
+        productName: new FormControl('' , Validators.required),
+        productDescription: new FormControl('' , Validators.required),
+        productCategory: new FormControl('' , Validators.required),
+      }
+    );
   }
 
   createProduct(){
@@ -31,7 +38,6 @@ export class ProductFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
-      console.log( 'data' ,this.productForm.value);
       this.productForm.reset();
       if (result.isConfirmed) {
         Swal.fire(

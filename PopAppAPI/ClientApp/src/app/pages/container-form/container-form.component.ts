@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 declare let Swal:any;
 
 @Component({
@@ -9,18 +9,27 @@ declare let Swal:any;
 })
 export class ContainerFormComponent implements OnInit {
   //container form
-    containerForm = new FormGroup({
-    containerType: new FormControl("", Validators.required),
-    containerPayload: new FormControl(0, Validators.required),
-    containerCapacity: new FormControl(0, Validators.required),
-    containerLenth: new FormControl(0, Validators.required),
-    containerWidth: new FormControl(0, Validators.required),
-    containerHeigth: new FormControl(0, Validators.required),
-  });
+    containerForm: FormGroup;
 
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.buildForm();
+  }
+
+  private buildForm(){
+    this.containerForm = this.formBuilder.group(
+      {
+        containerType: new FormControl("", Validators.required),
+        containerPayload: new FormControl(0, Validators.required),
+        containerCapacity: new FormControl(0, Validators.required),
+        containerLenth: new FormControl(0, Validators.required),
+        containerWidth: new FormControl(0, Validators.required),
+        containerHeigth: new FormControl(0, Validators.required)
+      }
+    );
+  }
+
 
   //methods
   createContainer(){
@@ -33,7 +42,7 @@ export class ContainerFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
-      console.log( 'data' ,this.containerForm.value);
+      
       this.containerForm.reset();
       if (result.isConfirmed) {
         Swal.fire(

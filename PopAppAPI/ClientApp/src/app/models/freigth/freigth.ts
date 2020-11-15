@@ -1,8 +1,8 @@
 export interface Freigth {
-  FreigthId: number;
-  FreigthCode: string;
-  FreigthDescription: string;
-  FreigthType: string;
-  FreigthWeigth: number;
-  IsActive: boolean;
+  freigthId: number;
+  freigthCode: string;
+  freigthDescription: string;
+  freigthType: string;
+  freigthWeigth: number;
+  isActive: boolean;
 }

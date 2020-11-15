@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 declare let Swal: any;
 
 @Component({
@@ -9,18 +9,26 @@ declare let Swal: any;
 })
 export class VesselFormComponent implements OnInit {
 
-  vesselForm = new FormGroup({
-    vesselName: new FormControl("", Validators.required),
-    vesselCode: new FormControl("", Validators.required),
-    vesselImo: new FormControl("", Validators.required),
-    vesselFlag: new FormControl("", Validators.required),
-    vesselSlora: new FormControl("", Validators.required),
-    vesselArrival: new FormControl("", Validators.required),
-  });
+  vesselForm: FormGroup;
 
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.formBuild();
+  }
+
+  private formBuild(){
+    this.vesselForm = this.formBuilder.group(
+      {
+        vesselName: new FormControl("", Validators.required),
+        vesselCode: new FormControl("", Validators.required),
+        vesselImo: new FormControl("", Validators.required),
+        vesselFlag: new FormControl("", Validators.required),
+        vesselSlora: new FormControl("", Validators.required),
+        vesselArrival: new FormControl("", Validators.required),
+      }
+    );
+  }
   
    createVessel(){
     Swal.fire({
@@ -32,7 +40,7 @@ export class VesselFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
-      console.log( 'data' ,this.vesselForm.value);
+      
       this.vesselForm.reset();
       if (result.isConfirmed) {
         Swal.fire(

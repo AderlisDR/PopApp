@@ -1,8 +1,8 @@
 export interface Company {
-         CompanyId: number;
-         CompanyName: string;
-         CompanyCode: string;
-         CompanyAdrees: string;
-         CompanyPhone: string;
-         IsActive:boolean;
+         companyId: number;
+         companyName: string;
+         companyCode: string;
+         companyAdrees: string;
+         companyPhone: string;
+         isActive:boolean;
 }

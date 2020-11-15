@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Freigth } from 'src/app/models/freigth/freigth';
+import { Freigth } from '../../models/freigth/freigth';
 
 @Injectable({
   providedIn: 'root'

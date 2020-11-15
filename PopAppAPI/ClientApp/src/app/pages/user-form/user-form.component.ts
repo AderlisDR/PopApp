@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 declare let Swal: any;
 
 @Component({
@@ -9,16 +9,23 @@ declare let Swal: any;
 })
 export class UserFormComponent implements OnInit {
 
-  userForm = new FormGroup({
-    UserName: new FormControl('' , Validators.required),
-    Email: new FormControl('' , Validators.required),
-    Password: new FormControl('' , Validators.required),
-    UserRole: new FormControl('' , Validators.required)
-  });
+  userForm: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.formBuild();
+  }
+
+  private formBuild(){
+    this.userForm = this.formBuilder.group(
+      {
+        UserName: new FormControl('' , Validators.required),
+        Email: new FormControl('' , Validators.required),
+        Password: new FormControl('' , Validators.required),
+        UserRole: new FormControl('' , Validators.required)
+      }
+    );
   }
 
   createUser(){
@@ -31,7 +38,7 @@ export class UserFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
-      console.log( 'data' ,this.userForm.value);
+      
       this.userForm.reset();
       if (result.isConfirmed) {
         Swal.fire(

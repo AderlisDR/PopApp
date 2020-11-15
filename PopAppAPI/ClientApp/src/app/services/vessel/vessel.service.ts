@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Vessel } from 'src/app/models/vessel/vessel';
+import { Vessel } from '../../models/vessel/vessel';
 
 @Injectable({
   providedIn: 'root'

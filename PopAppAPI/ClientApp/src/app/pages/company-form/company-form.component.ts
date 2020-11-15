@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 declare let Swal:any;
 
 @Component({
@@ -10,16 +10,23 @@ declare let Swal:any;
 export class CompanyFormComponent implements OnInit {
 
   //company form
-    companyForm = new FormGroup({
-    companyName: new FormControl('' , Validators.required),
-    companyCode: new FormControl('', Validators.required),
-    companyAdress: new FormControl('' , Validators.required),
-    companyPhone: new FormControl('' , Validators.required)
-  });
+    companyForm:  FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.buildForm();
+  }
+
+  private buildForm(){
+    this.companyForm = this.formBuilder.group({
+      
+        companyName: new FormControl('' , Validators.required),
+        companyCode: new FormControl('', Validators.required),
+        companyAdress: new FormControl('' , Validators.required),
+        companyPhone: new FormControl('' , Validators.required)
+      
+    });
   }
 
   //methods
@@ -34,7 +41,7 @@ export class CompanyFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
-      console.log( 'data' ,this.companyForm.value);
+      
       this.companyForm.reset();
       if (result.isConfirmed) {
         Swal.fire(

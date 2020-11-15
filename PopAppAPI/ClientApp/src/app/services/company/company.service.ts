@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { promise } from 'protractor';
-import { Company } from 'src/app/models/company/company';
+import { Company } from '../../models/company/company';
+
+
 
 @Injectable({
   providedIn: 'root'

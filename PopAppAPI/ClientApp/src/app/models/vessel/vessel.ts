@@ -1,10 +1,10 @@
 export interface Vessel {
-  VesselId: number;
-  VesselName: string;
-  VesselCode: string;
-  VesselImo: string;
-  VesselFlag: string;
-  VesselSlora: string;
-  VesselArrival: string;
-  IsActive: string;
+  vesselId: number;
+  vesselName: string;
+  vesselCode: string;
+  vesselImo: string;
+  vesselFlag: string;
+  vesselSlora: string;
+  vesselArrival: string;
+  isActive: string;
 }
