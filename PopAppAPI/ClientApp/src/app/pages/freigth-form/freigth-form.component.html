@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header text-white text-center bg-primary">Freigth Form</div>
+  <div class="card-body">
+
+    <form [formGroup]="freigthForm" (ngSubmit)="createFreigth()">
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Freigth Code</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="freigthCode">
+          <mat-error *ngIf="freigthForm.controls.companyAdress.hasError('required')">
+            Freigth Code is Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Freigth Description</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="freigthDescription">
+          <mat-error *ngIf="freigthForm.controls.freigthDescription.hasError('required')">
+            Freigth Description is Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Freigth Type</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="freigthType">
+          <mat-error *ngIf="freigthForm.controls.freigthType.hasError('required')">
+            Freigth Type is Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Freigth Weigth</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="freigthWeigth">
+          <mat-error *ngIf="freigthForm.controls.freigthWeigth.hasError('required')">
+            Freigth Weigth is Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" [disabled]="!freigthForm.valid">send</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>
