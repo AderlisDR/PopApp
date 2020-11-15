@@ -1,0 +1,69 @@
+<div class="card">
+  <div class="card-header text-center text-white bg-primary">Container</div>
+  <div class="card-body">
+    <form [formGroup]="containerForm" (ngSubmit)="createContainer()">
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Container Type</mat-label>
+          <input matInput placeholder="Ex. San Francisco" class="form-control" formControlName="containerType" min="0">
+          <mat-error *ngIf="containerForm.controls.containerType.hasError('required')">
+            Container Type is Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>container Payload</mat-label>
+          <input type="number" matInput placeholder="Ex. San Francisco" class="form-control"
+            formControlName="containerPayload" min="0">
+            <mat-error *ngIf="containerForm.controls.containerPayload.hasError('required')">
+              Container Payload is Required
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Container Capacity</mat-label>
+          <input type="number" matInput placeholder="Ex. San Francisco" class="form-control"
+            formControlName="containerCapacity" min="0">
+            <mat-error *ngIf="containerForm.controls.containerCapacity.hasError('required')">
+              Container Capacity is Required
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Container Lenth</mat-label>
+          <input type="number" type="number" matInput placeholder="Ex. San Francisco" class="form-control"
+            formControlName="containerLenth" min="0">
+            <mat-error *ngIf="containerForm.controls.containerLenth.hasError('required')">
+              Container Lenth is Required
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Container Width</mat-label>
+          <input type="number" matInput placeholder="Ex. San Francisco" class="form-control"
+            formControlName="containerWidth" min="0">
+            <mat-error *ngIf="containerForm.controls.containerWidth.hasError('required')">
+              Container Width is Required
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Container Heigth</mat-label>
+          <input type="number" matInput placeholder="Ex. San Francisco" class="form-control"
+            formControlName="containerHeigth" min="0">
+            <mat-error *ngIf="containerForm.controls.containerHeigth.hasError('required')">
+              Container Heigth is Required
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!containerForm.valid">Send</button>
+      </div>
+    </form>
+  </div>
+</div>
