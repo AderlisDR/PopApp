@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-header text-white text-center bg-primary">Vessel Form</div>
+  <div class="card-body">
+
+    <form [formGroup]="vesselForm" (ngSubmit)="createVessel()">
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Vessel Name</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="vesselName">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Vessel Code</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="vesselCode">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Vessel Imo</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="vesselImo">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Vessel Flag</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="vesselFlag">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Vessel Slora</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="vesselSlora">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Vessel Arrival</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="vesselArrival">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" [disabled]="!vesselForm.valid">Send</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
