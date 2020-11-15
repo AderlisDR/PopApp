@@ -1,15 +1,23 @@
-
 <header>
   <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand" href="#">PopApp</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand">PopApp</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+      data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <span class="w-100"></span>
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
-      </li>
-    </ul>
+    <div class="nav-bar-content">
+      <span class="welcome-text">
+        ¡Bienvenido <span class="username-text">{{currentUser.username}}</span>!
+      </span>
+      <span class="dropdown">
+        <div class="user-avatar rounded-circle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{currentUser.username.charAt(0) | uppercase}}
+        </div>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a (click)="logout()" class="dropdown-item">Cerrar sesión</a>
+        </div>
+      </span>
+    </div>
   </nav>
 </header>

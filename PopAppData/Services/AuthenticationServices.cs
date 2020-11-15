@@ -2,9 +2,6 @@
 using PopApp.Core.Entities;
 using PopApp.Core.Interfaces.Services;
 using PopApp.Structure.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PopApp.Structure.Services

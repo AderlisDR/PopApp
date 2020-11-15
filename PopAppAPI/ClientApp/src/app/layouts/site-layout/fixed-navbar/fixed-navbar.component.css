@@ -1,3 +1,8 @@
+.navbar {
+    width: 100%;
+    position: fixed;
+}
+
 .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
@@ -14,4 +19,45 @@
     padding: .75rem 1rem;
     border-width: 0;
     border-radius: 0;
+}
+
+.nav-link:hover {
+    cursor: pointer !important;
+}
+
+.user-avatar {
+    vertical-align: middle;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #e01a76;
+    padding: 10px 15px;
+}
+
+.nav-bar-content {
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.welcome-text {
+    font-size: large;
+    margin-right: 0.25rem;
+}
+
+.username-text {
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .nav-bar-content {
+        margin-right: 85px;
+    }
+
+    .welcome-text {
+        display: none;
+    }
 }

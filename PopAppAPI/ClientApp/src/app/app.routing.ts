@@ -1,10 +1,12 @@
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { HomeComponent } from './pages/home/home.component';
 import { AccountLayoutComponent } from './layouts/account-layout/account-layout.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
+import { CounterComponent } from './pages/counter/counter.component';
+import { FetchDataComponent } from './pages/fetch-data/fetch-data.component';
+import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AuthGuard } from './services/guards/auth.guard';
+import { RoleGuard } from './services/guards/role.guard';
 import { CompanyFormComponent } from './pages/company-form/company-form.component';
 import { ContainerFormComponent } from './pages/container-form/container-form.component';
 import { FreigthFormComponent } from './pages/freigth-form/freigth-form.component';
@@ -19,18 +21,17 @@ export const AppRoutes = [
         children: [
             {
                 path: '',
-                component: HomeComponent,
-                canActivate: []
+                component: HomeComponent
             },
             {
                 path: 'counter',
                 component: CounterComponent,
-                canActivate: []
+                canActivate: [AuthGuard, RoleGuard]
             },
             {
                 path: 'fetch-data',
                 component: FetchDataComponent,
-                canActivate: []
+                canActivate: [AuthGuard, RoleGuard]
             },
             {
                 path: 'company',
