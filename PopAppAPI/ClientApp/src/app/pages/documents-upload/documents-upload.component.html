@@ -1,0 +1,8 @@
+<div class="clearfix">
+  <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/" nzListType="picture-card" [(nzFileList)]="fileList"
+    [nzShowButton]="fileList.length < 1" [nzShowUploadList]="showUploadList" [nzPreview]="handlePreview"
+    [nzFileType]="acceptedFileTypes">
+    <i nz-icon nzType="plus"></i>
+    <div class="ant-upload-text">Cargar imagen</div>
+  </nz-upload>
+</div>

@@ -9,12 +9,14 @@ export function createAbilityFor(role: UserRole): RawRule[] {
 
     const views = {
         all: 'all',
-        counter: 'Counter'
+        counter: 'Counter',
+        documents: 'Carga de archivos'
     };
 
     const routes = {
         all: 'all',
-        counter: 'counter'
+        counter: 'counter',
+        documents: 'documents-upload'
     };
 
     const {can, rules} = AbilityBuilder.extract();

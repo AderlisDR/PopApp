@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material';
 import { MatRippleModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -12,6 +13,7 @@ import { AbilityModule } from '@casl/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { DxDataGridModule } from 'devextreme-angular';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { AccountLayoutComponent } from './layouts/account-layout/account-layout.component';
@@ -19,24 +21,24 @@ import { FixedNavbarComponent } from './layouts/site-layout/fixed-navbar/fixed-n
 import { SidebarMenuComponent } from './layouts/site-layout/sidebar-menu/sidebar-menu.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
 import { StickyFooterComponent } from './layouts/site-layout/sticky-footer/sticky-footer.component';
-import { CounterComponent } from './pages/counter/counter.component';
-import { FetchDataComponent } from './pages/fetch-data/fetch-data.component';
 import { CompanyFormComponent } from './pages/company-form/company-form.component';
+import { ContainerFormComponent } from './pages/container-form/container-form.component';
+import { CounterComponent } from './pages/counter/counter.component';
+import { DocumentsUploadComponent } from './pages/documents-upload/documents-upload.component';
+import { FetchDataComponent } from './pages/fetch-data/fetch-data.component';
+import { FreigthFormComponent } from './pages/freigth-form/freigth-form.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ProductFormComponent } from './pages/product-form/product-form.component';
+import { UserFormComponent } from './pages/user-form/user-form.component';
+import { VesselFormComponent } from './pages/vessel-form/vessel-form.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/guards/auth.guard';
 import { RoleGuard } from './services/guards/role.guard';
 import { NavigationService } from './services/navigation.service';
 import { TokenInterceptor } from './shared/helpers/token-interceptor';
 import { SharedModule } from './shared/shared.module';
-import {MatInputModule} from '@angular/material/input';
-import { ContainerFormComponent } from './pages/container-form/container-form.component';
-import { FreigthFormComponent } from './pages/freigth-form/freigth-form.component';
-import { ProductFormComponent } from './pages/product-form/product-form.component';
-import { UserFormComponent } from './pages/user-form/user-form.component';
-import { VesselFormComponent } from './pages/vessel-form/vessel-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -60,7 +62,8 @@ export function tokenGetter() {
     FreigthFormComponent,
     ProductFormComponent,
     UserFormComponent,
-    VesselFormComponent
+    VesselFormComponent,
+    DocumentsUploadComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -82,7 +85,8 @@ export function tokenGetter() {
     MatIconModule,
     MatRippleModule,
     FlexLayoutModule,
-    DxDataGridModule
+    DxDataGridModule,
+    NgZorroAntdModule
   ],
   providers: [
     AuthService,

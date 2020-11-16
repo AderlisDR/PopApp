@@ -21,6 +21,12 @@ export class NavigationService {
             type: 'link',
             icon: 'api',
             state: 'fetch-data'
+        },
+        {
+            name: 'Carga de archivos',
+            type: 'link',
+            icon: 'note_add',
+            state: 'documents-upload'
         }
     ];
     menuItems = new BehaviorSubject<IMenuItem[]>(this.iconMenu);

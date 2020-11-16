@@ -1,18 +1,19 @@
 import { AccountLayoutComponent } from './layouts/account-layout/account-layout.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
+import { CompanyFormComponent } from './pages/company-form/company-form.component';
+import { ContainerFormComponent } from './pages/container-form/container-form.component';
 import { CounterComponent } from './pages/counter/counter.component';
+import { DocumentsUploadComponent } from './pages/documents-upload/documents-upload.component';
 import { FetchDataComponent } from './pages/fetch-data/fetch-data.component';
+import { FreigthFormComponent } from './pages/freigth-form/freigth-form.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AuthGuard } from './services/guards/auth.guard';
-import { RoleGuard } from './services/guards/role.guard';
-import { CompanyFormComponent } from './pages/company-form/company-form.component';
-import { ContainerFormComponent } from './pages/container-form/container-form.component';
-import { FreigthFormComponent } from './pages/freigth-form/freigth-form.component';
 import { ProductFormComponent } from './pages/product-form/product-form.component';
 import { UserFormComponent } from './pages/user-form/user-form.component';
 import { VesselFormComponent } from './pages/vessel-form/vessel-form.component';
+import { AuthGuard } from './services/guards/auth.guard';
+import { RoleGuard } from './services/guards/role.guard';
 
 export const AppRoutes = [
     {
@@ -36,34 +37,38 @@ export const AppRoutes = [
             {
                 path: 'company',
                 component: CompanyFormComponent,
-                canActive: []
+                canActive: [AuthGuard, RoleGuard]
             },
             {
                 path: 'container',
                 component: ContainerFormComponent,
-                canActive: []
+                canActive: [AuthGuard, RoleGuard]
             },
             {
                 path: 'freigth',
                 component: FreigthFormComponent,
-                canActive: []
+                canActive: [AuthGuard, RoleGuard]
             },
             {
                 path: 'product',
                 component: ProductFormComponent,
-                canActive: []
+                canActive: [AuthGuard, RoleGuard]
             },
             {
                 path: 'user',
                 component: UserFormComponent,
-                canActive: []
+                canActive: [AuthGuard, RoleGuard]
             },
             {
                 path: 'vessel',
                 component: VesselFormComponent,
-                canActive: []
+                canActive: [AuthGuard, RoleGuard]
+            },
+            {
+                path: 'documents-upload',
+                component: DocumentsUploadComponent,
+                canActive: [AuthGuard, RoleGuard]
             }
-
         ]
     },
     {
