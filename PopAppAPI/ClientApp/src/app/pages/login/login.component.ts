@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   private showLoading(): void {
     Swal.fire({
       title: 'Enviando...',
+      showConfirmButton: false,
       onBeforeOpen: () => {
         Swal.showLoading();
       }
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
   private showError(message: string): void {
     Swal.fire({
       title: message,
-      icon: 'error',
+      icon: 'error'
     });
   }
 }
