@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './fetch-data.component.html'
 })
 export class FetchDataComponent {
+
   public forecasts: WeatherForecast[];
+  
   groupPanelTexts = {
     groupByThisColumn: 'Agrupar por esta columna',
     groupContinuedMessage: 'Continuación desde la página anterior',
