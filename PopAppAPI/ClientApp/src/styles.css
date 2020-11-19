@@ -61,6 +61,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-weight: bold;
 }
 
+.w-inherit {
+  width: inherit !important;
+}
+
 @-webkit-keyframes sk-bounce {
   0%,
   100% {

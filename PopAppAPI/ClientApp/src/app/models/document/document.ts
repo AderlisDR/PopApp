@@ -3,6 +3,6 @@ export interface Document {
      documentTitle: string;
      documentDescription: string;
      documentImage: string;
-     createAt: Date
+     createAt: Date;
      isActive: boolean;
 }

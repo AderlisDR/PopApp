@@ -1,8 +1,33 @@
-<div class="clearfix">
-  <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/" nzListType="picture-card" [(nzFileList)]="fileList"
-    [nzShowButton]="fileList.length < 1" [nzShowUploadList]="showUploadList" [nzPreview]="handlePreview"
-    [nzFileType]="acceptedFileTypes">
-    <i nz-icon nzType="plus"></i>
-    <div class="ant-upload-text">Cargar imagen</div>
-  </nz-upload>
+<div class="card">
+  <h5 class="card-header">Carga de Documento de Buque</h5>
+  <div class="card-body">
+    <form [formGroup]="vesselDocumentForm">
+      <div class="clearfix">
+        <div class="form-group">
+          <label for="vessel"><b><span class="text-danger">*</span>Buque:</b></label>
+          <nz-select id="vessel" nzShowSearch nzAllowClear nzPlaceHolder="Seleccione un buque"
+            (ngModelChange)="handleSelectChange($event)" nzNotFoundContent="No hay opciones">
+            <nz-option *ngFor="let vessel of vessels" [nzLabel]="vessel.vesselId" [nzValue]="vessel.vesselName">
+            </nz-option>
+          </nz-select>
+        </div>
+        <div class="form-group">
+          <label for="description"><b><span class="text-danger">*</span>Descripción:</b></label>
+          <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+          <span *ngIf="vesselDocumentForm.get('description').touched && vesselDocumentForm.get('description').hasError('required')"
+            class="text-danger">El nombre de usuario es requerido.</span>
+        </div>
+        <div class="form-group">
+          <label for="image"><b><span class="text-danger">*</span>Imagen:</b></label>
+          <nz-upload id="image" nzAction="{{baseUrl}}api/documents/can-upload" nzListType="picture-card"
+            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1" [nzShowUploadList]="showUploadList"
+            [nzPreview]="handlePreview" [nzFileType]="acceptedFileTypes">
+            <i nz-icon nzType="plus"></i>
+            <div class="ant-upload-text">Cargar imagen</div>
+          </nz-upload>
+        </div>
+        <button class="btn btn-lg btn-primary" type="submit">Cargar imagen</button>
+      </div>
+    </form>
+  </div>
 </div>

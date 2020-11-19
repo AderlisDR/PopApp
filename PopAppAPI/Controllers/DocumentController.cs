@@ -84,5 +84,8 @@ namespace PopAppMaster.Api.Controllers
                 return Ok(e.Message);
             }
         }
+
+        [HttpPost("can-upload")]
+        public IActionResult CanUpload() => Ok();
     }
 }
