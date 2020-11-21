@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Container } from 'src/app/models/container/container';
+import { Container } from '../../models/container/container';
+import { ContainerService } from '../../services/container/container.service';
 
 @Component({
   selector: 'app-container-grid',
@@ -9,6 +10,7 @@ import { Container } from 'src/app/models/container/container';
 export class ContainerGridComponent implements OnInit {
 
   containerData: Container[];
+
   groupPanelTexts = {
     groupByThisColumn: 'Agrupar por esta columna',
     groupContinuedMessage: 'Continuación desde la página anterior',
@@ -16,13 +18,20 @@ export class ContainerGridComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor(private containerService: ContainerService) { }
 
   ngOnInit() {
+    this.onGetContainers();
   }
 
   onExport(){
     
+  }
+
+  onGetContainers(){
+    this.containerService.GetContainers().then((resp: Container[]) =>{
+        this.containerData = [...resp];
+    }).catch( err =>{});
   }
 
 }
