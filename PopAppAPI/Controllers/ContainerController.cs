@@ -63,7 +63,7 @@ namespace PopAppMaster.Api.Controllers
                 var container = _mapper.Map<Container>(containerDto);
                 container.IsActive = true;
                 await _repo.CreateContainer(container);
-                return Ok("Container was Created!");
+                return Ok();
             }
             catch (Exception e)
             {

@@ -63,7 +63,7 @@ namespace PopAppMaster.Api.Controllers
                 var company = _mapper.Map<Company>(companyDto);
                 company.IsActive = true;
                 await _repo.CreateCompany(company);
-                return Ok("Company Was Registred!");
+                return Ok();
 
             }
             catch (Exception e)
