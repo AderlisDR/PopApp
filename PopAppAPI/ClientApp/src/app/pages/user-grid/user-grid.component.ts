@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user/user';
+import { User } from '../../models/user/user';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-user-grid',
@@ -15,11 +16,18 @@ export class UserGridComponent implements OnInit {
     groupContinuesMessage: 'Continúa en la siguiente página'
   };
 
-  constructor() { }
+  constructor(private userServices: UserService) { }
 
   ngOnInit() {
+    this.onGetUsers();
   }
 
   onExport(){}
+
+  onGetUsers(){
+    this.userServices.GetUsers().then((resp: User[])=>{
+      this.userData = [...resp];
+    }).catch(err =>{});
+  }
 
 }
