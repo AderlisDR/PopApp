@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DocumentService } from '../../services/document/document.service';
 
 @Component({
   selector: 'app-document-grid',
@@ -14,11 +15,18 @@ export class DocumentGridComponent implements OnInit {
     groupContinuesMessage: 'Continúa en la siguiente página'
   };
 
-  constructor() { }
+  constructor(private documentServices: DocumentService) { }
 
   ngOnInit() {
+    this.onGetDocuments();
   }
 
   onExport(){}
+
+  onGetDocuments(){
+    this.documentServices.GetDocuments().then((resp: Document[])=>{
+        this.documentData = [...resp];
+    }).catch(err =>{});
+  }
 
 }
