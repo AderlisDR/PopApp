@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Freigth } from 'src/app/models/freigth/freigth';
+import { Freigth } from '../../models/freigth/freigth';
+import { FreigthService } from '../../services/freigth/freigth.service';
 
 @Component({
   selector: 'app-freigth-grid',
@@ -15,11 +16,18 @@ export class FreigthGridComponent implements OnInit {
     groupContinuesMessage: 'Continúa en la siguiente página'
   };
 
-  constructor() { }
+  constructor(private freigthService: FreigthService) { }
 
   ngOnInit() {
+    this.onGetFreigth();
   }
 
   onExport(){}
+
+  onGetFreigth(){
+    this.freigthService.GetFreigths().then((resp: Freigth[]) =>{
+      this.freigthData = [...resp];
+    }).catch();
+  }
 
 }
