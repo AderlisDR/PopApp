@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from 'src/app/models/company/company';
+import { Company } from '../../models/company/company';
+import { CompanyService } from '../../services/company/company.service';
 
 @Component({
   selector: 'app-company-grid',
@@ -9,6 +10,7 @@ import { Company } from 'src/app/models/company/company';
 export class CompanyGridComponent implements OnInit {
 
   public companyData: Company[];
+
   groupPanelTexts = {
     groupByThisColumn: 'Agrupar por esta columna',
     groupContinuedMessage: 'Continuación desde la página anterior',
@@ -16,13 +18,22 @@ export class CompanyGridComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit() {
+    this.onGetCompanies();
   }
 
   onExport() {
     // TO DO
+  }
+
+  onGetCompanies(){
+    this.companyService.GetCompanies().then((resp: Company[]) =>{
+         this.companyData = [...resp];
+    }).catch(err =>{
+        
+    });
   }
 
 }
