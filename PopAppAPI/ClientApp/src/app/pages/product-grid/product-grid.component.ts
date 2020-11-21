@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product/product';
+import { Product } from '../../models/product/product';
+import { ProductService } from '../../services/product/product.service';
 
 @Component({
   selector: 'app-product-grid',
@@ -15,11 +16,17 @@ export class ProductGridComponent implements OnInit {
     groupContinuesMessage: 'Continúa en la siguiente página'
   };
 
-  constructor() { }
+  constructor(private productServices: ProductService) { }
 
   ngOnInit() {
   }
 
   onExport(){}
+
+  onGetProducts(){
+    this.productServices.GetProducts().then((resp: Product[])=>{
+      this.productData = [...resp];
+    }).catch(err =>{});
+  }
 
 }

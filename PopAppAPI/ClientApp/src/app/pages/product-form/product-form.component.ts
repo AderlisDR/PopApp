@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from 'src/app/services/product/product.service';
+import { Product } from '../../models/product/product';
 declare let Swal: any;
 
 @Component({
@@ -11,7 +13,7 @@ export class ProductFormComponent implements OnInit {
 
   productForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder , private productService: ProductService) { }
 
   ngOnInit() {
     this.formBuild();
@@ -40,6 +42,15 @@ export class ProductFormComponent implements OnInit {
     }).then((result) => {
       this.productForm.reset();
       if (result.isConfirmed) {
+
+        let product: Product = {
+           productName: this.productForm.controls.productName.value,
+           productCategory: this.productForm.controls.productCategory.value,
+           productDescription: this.productForm.controls.productDescription.value
+        }
+
+        this.productService.PostProduct(product).then(resp =>{}).catch(err =>{});
+
         Swal.fire(
           'Complete!',
           'Your file has been Saved.',
