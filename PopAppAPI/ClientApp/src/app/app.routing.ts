@@ -76,6 +76,11 @@ export const AppRoutes = [
                 canActive: []
             },
             {
+                path: 'company/:id',
+                component: CompanyFormComponent,
+                canActive: []
+            },
+            {
                 path: 'container-grid',
                 component: ContainerGridComponent,
                 canActive: []
