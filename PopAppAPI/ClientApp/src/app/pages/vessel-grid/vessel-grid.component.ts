@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Vessel } from 'src/app/models/vessel/vessel';
+import { Vessel } from '../../models/vessel/vessel';
+import { VesselService } from '../../services/vessel/vessel.service';
 
 @Component({
   selector: 'app-vessel-grid',
@@ -15,11 +16,18 @@ export class VesselGridComponent implements OnInit {
     groupContinuesMessage: 'Continúa en la siguiente página'
   };
 
-  constructor() { }
+  constructor(private vesselService: VesselService) { }
 
   ngOnInit() {
+    this.onGetVessels();
   }
 
   onExport(){}
+
+  onGetVessels(){
+    this.vesselService.GetVessels().then((resp: Vessel[])=>{
+      this.vesselData = [...resp];
+    }).catch(err => {});
+  }
 
 }

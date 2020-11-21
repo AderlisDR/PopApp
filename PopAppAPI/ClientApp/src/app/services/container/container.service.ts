@@ -10,23 +10,23 @@ export class ContainerService {
   constructor(private http: HttpClient , @Inject('BASE_URL') private baseUrl: string) { }
 
   GetContainers(): Promise<Container[]>{
-    return this.http.get<Container[]>(`${this.baseUrl}/container`).toPromise();
+    return this.http.get<Container[]>(`${this.baseUrl}api/containers`).toPromise();
   }
   
   GetContainer(id: number): Promise<Container>{
-    return this.http.get<Container>(`${this.baseUrl}/container/${id}`).toPromise();
+    return this.http.get<Container>(`${this.baseUrl}api/containers/${id}`).toPromise();
   }
   
   PostContainer(container: Container){
-    return this.http.post(`${this.baseUrl}/container` , container).toPromise();
+    return this.http.post(`${this.baseUrl}api/containers` , container).toPromise();
   }
   
   PutContainer(container: Container , id: number){
-    return this.http.put(`${this.baseUrl}/container/${id}` , container).toPromise();
+    return this.http.put(`${this.baseUrl}api/containers/${id}` , container).toPromise();
   }
   
   DeleteContainer(id: number){
-    return this.http.delete(`${this.baseUrl}/container/${id}`).toPromise();
+    return this.http.delete(`${this.baseUrl}api/containers/${id}`).toPromise();
   }
 
 }
