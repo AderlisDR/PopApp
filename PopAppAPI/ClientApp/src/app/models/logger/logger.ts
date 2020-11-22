@@ -1,6 +1,6 @@
 export interface Logger {
-  loggerId: number;
-  screenPopApp: string;
-  userName: string;
-  process: string;
+  loggerId?: number;
+  screenPopApp?: string;
+  userName?: string;
+  process?: string;
 }

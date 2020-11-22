@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Vessel } from "src/app/models/vessel/vessel";
+import { VesselService } from "src/app/services/vessel/vessel.service";
 declare let Swal: any;
 
 @Component({
@@ -11,7 +13,7 @@ export class VesselFormComponent implements OnInit {
 
   vesselForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder , private vesselService: VesselService) {}
 
   ngOnInit() {
     this.formBuild();
@@ -40,6 +42,17 @@ export class VesselFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
+
+      let vessel: Vessel ={
+        vesselName: this.vesselForm.controls.vesselName.value,
+        vesselCode: this.vesselForm.controls.vesselCode.value,
+        vesselImo: this.vesselForm.controls.vesselImo.value,
+        vesselFlag: this.vesselForm.controls.vesselFlag.value,
+        vesselSlora: this.vesselForm.controls.vesselSlora.value,
+        vesselArrival: this.vesselForm.controls.vesselArrival.value,
+      }
+
+      this.vesselService.PostVessel(vessel).then(resp=>{}).catch(err=>{});
       
       this.vesselForm.reset();
       if (result.isConfirmed) {

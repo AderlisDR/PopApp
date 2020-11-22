@@ -39,6 +39,19 @@ import { RoleGuard } from './services/guards/role.guard';
 import { NavigationService } from './services/navigation.service';
 import { TokenInterceptor } from './shared/helpers/token-interceptor';
 import { SharedModule } from './shared/shared.module';
+import {MatInputModule} from '@angular/material/input';
+import { ContainerFormComponent } from './pages/container-form/container-form.component';
+import { FreigthFormComponent } from './pages/freigth-form/freigth-form.component';
+import { ProductFormComponent } from './pages/product-form/product-form.component';
+import { UserFormComponent } from './pages/user-form/user-form.component';
+import { VesselFormComponent } from './pages/vessel-form/vessel-form.component';
+import { CompanyGridComponent } from './pages/company-grid/company-grid.component';
+import { ContainerGridComponent } from './pages/container-grid/container-grid.component';
+import { DocumentGridComponent } from './pages/document-grid/document-grid.component';
+import { FreigthGridComponent } from './pages/freigth-grid/freigth-grid.component';
+import { ProductGridComponent } from './pages/product-grid/product-grid.component';
+import { UserGridComponent } from './pages/user-grid/user-grid.component';
+import { VesselGridComponent } from './pages/vessel-grid/vessel-grid.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -63,6 +76,13 @@ export function tokenGetter() {
     ProductFormComponent,
     UserFormComponent,
     VesselFormComponent,
+    CompanyGridComponent,
+    ContainerGridComponent,
+    DocumentGridComponent,
+    FreigthGridComponent,
+    ProductGridComponent,
+    UserGridComponent,
+    VesselGridComponent,
     DocumentsUploadComponent
   ],
   imports: [

@@ -1,0 +1,53 @@
+<h1 id="tableLabel">Tabla Documento</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!documentData"><em>Loading...</em></p>
+
+<dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="documentData"
+  [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"
+  [showBorders]="false" [allowColumnResizing]="true" (onExporting)="onExport()">
+
+  <dxo-group-panel [visible]="true" [emptyPanelText]="'Arrastre columnas aquí para agrupar'">
+  </dxo-group-panel>
+  <dxo-grouping [autoExpandAll]="false" [texts]="groupPanelTexts"></dxo-grouping>
+
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [visible]="true" [showInfo]="true" [infoText]="'Página {0} de {1} ({2} registros)'"
+    [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+
+  <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar..." [width]="300">
+  </dxo-search-panel>
+
+  <dxo-export [enabled]="true" fileName="{filename}"
+    [texts]="{exportAll: 'Exportar a Excel'}">
+  </dxo-export>
+
+  <dxi-column dataField="documentTitle" caption="Titulo" [hidingPriority]="0"></dxi-column>
+  <dxi-column dataField="documentImage" caption="Imagen" [hidingPriority]="0"></dxi-column>
+  <dxi-column dataField="documentDescription" caption="Descripcion" [hidingPriority]="0"></dxi-column>
+  
+
+  
+
+  <!-- <dxi-column caption="Acciones" cellTemplate="acciones" [allowExporting]="false"
+  [cssClass]="'text-center'" *ngIf="canManage"></dxi-column>
+<div *dxTemplate="let data of 'acciones'">
+  <div>
+    <button class="mb-2 btn-sm button-party-outline" [routerLink]="['../polling-table', data.data.enclosureId]"
+      *ngIf="canManage || isProvintial">
+      Detalles
+    </button>&nbsp;
+    <button class="mb-2 btn-sm button-party-outline" *ngIf="!data.data.hasCoordinator"
+      (click)="openCreateEnclosureCoordinatorModal(data.data.enclosureId)"
+      matTooltip="Asignar coordinador de recinto" matTooltipPosition="above">
+      &nbsp;<i class="fas fa-user-plus"></i>&nbsp;
+    </button>
+    <button class="btn button-party-outline btn-sm" *ngIf="data.data.hasCoordinator"
+      (click)="openCreateEnclosureCoordinatorModal(data.data.enclosureId, data.data.coordinatorIdentification)"
+      matTooltip="Ver detalles del coordinador de recinto" matTooltipPosition="above">
+      &nbsp;<i class="fas fa-eye"></i>&nbsp;
+    </button>
+  </div>
+</div> -->
+</dx-data-grid>

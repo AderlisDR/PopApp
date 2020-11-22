@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PopAppMaster.Api.Controllers
 {
-    [Route("api/freigth")]
+    [Route("api/freigths")]
     [ApiController]
     [Authorize]
     public class FreigthController : ControllerBase

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Company } from 'src/app/models/company/company';
+import { CompanyService } from 'src/app/services/company/company.service';
 declare let Swal:any;
 
 @Component({
@@ -11,10 +14,15 @@ export class CompanyFormComponent implements OnInit {
 
   //company form
     companyForm:  FormGroup;
+    
+    
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder , private companyService: CompanyService , private activedRouter: ActivatedRoute) { }
+
+  
 
   ngOnInit() {
+    this.onUpdateCompany();
     this.buildForm();
   }
 
@@ -25,7 +33,6 @@ export class CompanyFormComponent implements OnInit {
         companyCode: new FormControl('', Validators.required),
         companyAdress: new FormControl('' , Validators.required),
         companyPhone: new FormControl('' , Validators.required)
-      
     });
   }
 
@@ -41,7 +48,19 @@ export class CompanyFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
+
+       
+      const company: Company = {
+        companyName: this.companyForm.controls.companyName.value,
+        companyCode: this.companyForm.controls.companyCode.value,
+        companyAdrees: this.companyForm.controls.companyAdress.value,
+        companyPhone: this.companyForm.controls.companyPhone.value
+      }
+
+      this.companyService.PostCompany(company);
+
       
+
       this.companyForm.reset();
       if (result.isConfirmed) {
         Swal.fire(
@@ -51,6 +70,16 @@ export class CompanyFormComponent implements OnInit {
         )
       }
     })
+  }
+
+  onUpdateCompany(){
+    let parameter = this.activedRouter.snapshot.params['id'];
+    if(parameter){
+       let  company: Company;
+        this.companyService.GetCompany(parameter).then((resp: Company) =>{
+          company = resp;
+       })
+    }
   }
 
 }
