@@ -13,6 +13,13 @@ import { FreigthFormComponent } from './pages/freigth-form/freigth-form.componen
 import { ProductFormComponent } from './pages/product-form/product-form.component';
 import { UserFormComponent } from './pages/user-form/user-form.component';
 import { VesselFormComponent } from './pages/vessel-form/vessel-form.component';
+import { CompanyGridComponent } from './pages/company-grid/company-grid.component';
+import { ContainerGridComponent } from './pages/container-grid/container-grid.component';
+import { DocumentGridComponent } from './pages/document-grid/document-grid.component';
+import { FreigthGridComponent } from './pages/freigth-grid/freigth-grid.component';
+import { ProductGridComponent } from './pages/product-grid/product-grid.component';
+import { UserGridComponent } from './pages/user-grid/user-grid.component';
+import { VesselGridComponent } from './pages/vessel-grid/vessel-grid.component';
 
 export const AppRoutes = [
     {
@@ -61,6 +68,46 @@ export const AppRoutes = [
             {
                 path: 'vessel',
                 component: VesselFormComponent,
+                canActive: []
+            },
+            {
+                path: 'company-grid',
+                component: CompanyGridComponent,
+                canActive: []
+            },
+            {
+                path: 'company/:id',
+                component: CompanyFormComponent,
+                canActive: []
+            },
+            {
+                path: 'container-grid',
+                component: ContainerGridComponent,
+                canActive: []
+            },
+            {
+                path: 'document-grid',
+                component: DocumentGridComponent,
+                canActive: []
+            },
+            {
+                path: 'freigth-grid',
+                component: FreigthGridComponent,
+                canActive: []
+            },
+            {
+                path: 'product-grid',
+                component: ProductGridComponent,
+                canActive: []
+            },
+            {
+                path: 'user-grid',
+                component: UserGridComponent,
+                canActive: []
+            },
+            {
+                path: 'vessel-grid',
+                component: VesselGridComponent,
                 canActive: []
             }
 

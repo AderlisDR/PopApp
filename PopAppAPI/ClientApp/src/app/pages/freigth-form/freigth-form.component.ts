@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Freigth } from 'src/app/models/freigth/freigth';
+import { FreigthService } from 'src/app/services/freigth/freigth.service';
 declare let Swal: any;
 
 @Component({
@@ -11,7 +13,7 @@ export class FreigthFormComponent implements OnInit {
 
   freigthForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder , private freigthService: FreigthService) { }
 
   ngOnInit() {
     this.formBuild();
@@ -39,6 +41,15 @@ export class FreigthFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
+
+      let freigth: Freigth = {
+        freigthCode: this.freigthForm.controls.freigthCode.value,
+        freigthDescription: this.freigthForm.controls.freigthDescription.value,
+        freigthType: this.freigthForm.controls.freigthType.value,
+        freigthWeigth: this.freigthForm.controls.freigthWeigth.value,
+      }
+
+      this.freigthService.PostFreigth(freigth).then(resp =>{}).catch(err =>{});
       
       this.freigthForm.reset();
       if (result.isConfirmed) {
