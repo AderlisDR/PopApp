@@ -57,31 +57,18 @@ namespace PopAppMaster.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostDocument(IFormFile files)
+        public async Task<IActionResult> PostDocument([FromBody]DocumentDto documentRequest)
         {
             try
             {
-
-                DocumentDto documentDto = new DocumentDto
-                {
-                    DocumentTitle = files.FileName,
-                    CreateAt = DateTime.Now
-
-                };
-
-                using (var target = new MemoryStream())
-                {
-                    files.CopyTo(target);
-                    documentDto.DocumentImage = target.ToArray();
-                }
-
-                var document = _mapper.Map<Document>(documentDto);
+                var document = _mapper.Map<Document>(documentRequest);
                 await _repo.CreateDocument(document);
-                return Ok("document was Registred");
+
+                return Ok();
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Container } from "src/app/models/container/container";
 import { ContainerService } from "src/app/services/container/container.service";
-declare let Swal:any;
+import Swal from 'sweetalert2';
 
 @Component({
   selector: "app-container-form",
@@ -57,7 +57,7 @@ export class ContainerFormComponent implements OnInit {
       this.containerService.PostContainer(container).then((resp) =>{
 
       }).catch(err =>{});
-      
+
       this.containerForm.reset();
       if (result.isConfirmed) {
         Swal.fire(
