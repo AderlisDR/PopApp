@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
   private getToken(): void {
     const request: LoginRequest = this.loginForm.getRawValue();
-    this.authService.getToken(request).then((response: {token: string}) =>{
+    this.authService.getToken(request).then((response: {token: string}) => {
       this.closeLoading();
       this.authService.login(response.token);
     }).catch((error: HttpErrorResponse) => {
