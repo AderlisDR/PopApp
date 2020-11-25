@@ -14,6 +14,6 @@ namespace PopAppCore.Entities
         public DateTime ScheduleDate { get; set; }
         public DateTime CreateAt { get; set; }
         public bool IsActive { get; set; }
-        public virtual Collection<ContainerScheduleDto> ContainerSchedule { get; set; }
+        public virtual IEnumerable<ContainerScheduleDto> ContainerSchedule { get; set; }
     }
 }

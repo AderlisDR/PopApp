@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PopApp.Core.Dtos
 {
-    public class VesselDto
+    public sealed class VesselDto
     {
         public int VesselId { get; set; }
         public string VesselName { get; set; }

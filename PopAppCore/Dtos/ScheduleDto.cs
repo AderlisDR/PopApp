@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PopAppCore.Dtos
 {
-    public class ScheduleDto
+    public sealed class ScheduleDto
     {
         public DateTime ScheduleDate { get; set; }
         public DateTime CreateAt { get; set; }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PopAppCore.Dtos
 {
     public class FreigthScheduleDto
     {
         public string FreigthType {get; set;}
-        public virtual Collection<ProductScheduleDto> ProductSchedule { get; set; }
+        public virtual IEnumerable<ProductScheduleDto> ProductSchedule { get; set; }
     }
 }
