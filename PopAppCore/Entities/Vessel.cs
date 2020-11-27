@@ -16,5 +16,6 @@ namespace PopApp.Core.Entities
         public string VesselSlora { get; set; }
         public string VesselArrival { get; set; }
         public bool IsActive { get; set; }
+        public virtual IEnumerable<Document> Documents { get; set; }
     }
 }

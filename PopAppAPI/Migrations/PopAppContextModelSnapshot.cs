@@ -92,8 +92,8 @@ namespace PopAppAPI.Migrations
                     b.Property<string>("DocumentDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("DocumentImage")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("DocumentImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DocumentTitle")
                         .HasColumnType("nvarchar(max)");
@@ -101,7 +101,12 @@ namespace PopAppAPI.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<int>("VesselId")
+                        .HasColumnType("int");
+
                     b.HasKey("DocumentId");
+
+                    b.HasIndex("VesselId");
 
                     b.ToTable("Documents");
                 });
@@ -242,6 +247,15 @@ namespace PopAppAPI.Migrations
                     b.HasKey("VesselId");
 
                     b.ToTable("Vessels");
+                });
+
+            modelBuilder.Entity("PopApp.Core.Entities.Document", b =>
+                {
+                    b.HasOne("PopApp.Core.Entities.Vessel", null)
+                        .WithMany("Documents")
+                        .HasForeignKey("VesselId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

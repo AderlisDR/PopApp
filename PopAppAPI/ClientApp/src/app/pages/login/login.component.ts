@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   private showLoading(): void {
     Swal.fire({
       title: 'Enviando...',
+      showConfirmButton: false,
       onBeforeOpen: () => {
         Swal.showLoading();
       }
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
 
   private getToken(): void {
     const request: LoginRequest = this.loginForm.getRawValue();
-    this.authService.getToken(request).then((response: {token: string}) =>{
+    this.authService.getToken(request).then((response: {token: string}) => {
       this.closeLoading();
       this.authService.login(response.token);
     }).catch((error: HttpErrorResponse) => {
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
   private showError(message: string): void {
     Swal.fire({
       title: message,
-      icon: 'error',
+      icon: 'error'
     });
   }
 }

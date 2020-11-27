@@ -7,7 +7,7 @@ namespace PopApp.Core.Dtos
     public class ContainerDto
     {
         public int ContainerId { get; set; }
-        public decimal ContainerType { get; set; }
+        public string ContainerType { get; set; }
         public decimal ContainerPayload { get; set; }
         public decimal ContainerCapacity { get; set; }
         public decimal ContainerLenth { get; set; }

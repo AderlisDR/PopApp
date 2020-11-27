@@ -2,9 +2,11 @@
 using PopApp.Core.Entities;
 using PopApp.Core.Interfaces.Services;
 using PopApp.Structure.Data;
+using PopAppCore.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PopApp.Structure.Services
@@ -63,6 +65,16 @@ namespace PopApp.Structure.Services
                 _context.Update(updateVessel);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<VesselComboDto>> GetVesselsForComboByCondition(Expression<Func<Vessel, bool>> expression)
+        {
+            return await _context.Vessels.Where(expression).Select(vessel => new VesselComboDto
+            {
+                VesselId = vessel.VesselId,
+                VesselName = vessel.VesselName,
+                VesselCode = vessel.VesselCode
+            }).ToListAsync();
         }
     }
 }
