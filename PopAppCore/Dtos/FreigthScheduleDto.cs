@@ -2,9 +2,9 @@
 
 namespace PopAppCore.Dtos
 {
-    public class FreigthScheduleDto
+    public sealed class FreigthScheduleDto
     {
         public string FreigthType {get; set;}
-        public virtual IEnumerable<ProductScheduleDto> ProductSchedule { get; set; }
+        public  IEnumerable<ProductScheduleDto> ProductSchedule { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace PopAppCore.Entities
         [Key]
         public int ScheduleId { get; set; }
         public DateTime ScheduleDate { get; set; }
+        public int VesselId { get; set; }
         public DateTime CreateAt { get; set; }
         public bool IsActive { get; set; }
         public virtual IEnumerable<ContainerScheduleDto> ContainerSchedule { get; set; }
