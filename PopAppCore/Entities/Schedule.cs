@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PopAppCore.Entities
 {
-    public class Schedule
+    public sealed class Schedule
     {
         [Key]
         public int ScheduleId { get; set; }

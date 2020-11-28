@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PopApp.Core.Entities
 {
-    public class Container
+    public sealed class Container
     {
         [Key]
         public int ContainerId { get; set; }

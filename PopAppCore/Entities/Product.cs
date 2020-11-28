@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PopApp.Core.Entities
 {
-    public class Product
+    public sealed class Product
     {
         [Key]
         public int ProductId { get; set; }
