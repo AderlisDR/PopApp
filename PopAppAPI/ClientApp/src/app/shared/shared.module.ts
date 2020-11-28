@@ -7,6 +7,7 @@ import { MatIconModule, MatInputModule, MatRippleModule } from '@angular/materia
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DxDataGridModule } from 'devextreme-angular';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DropdownAnchorDirective } from './directives/dropdown-anchor.directive';
 import { DropdownLinkDirective } from './directives/dropdown-link.directive';
 import { AppDropdownDirective } from './directives/dropdown.directive';
@@ -31,6 +32,7 @@ const directives = [
     FormsModule,
     FontAwesomeModule,
     MatInputModule,
+    NzIconModule
   ],
   exports: [
     CommonModule,
@@ -44,6 +46,7 @@ const directives = [
     FormsModule,
     FontAwesomeModule,
     MatInputModule,
+    NzIconModule,
     ...directives
   ]
 })
