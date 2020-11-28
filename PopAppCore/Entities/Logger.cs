@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PopApp.Core.Entities
 {
-    public class Logger
+    public sealed class Logger
     {
         [Key]
         public int LoggerId { get; set; }

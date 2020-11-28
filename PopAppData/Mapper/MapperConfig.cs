@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using PopApp.Core.Dtos;
 using PopApp.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using PopAppCore.Dtos;
+using PopAppCore.Entities;
 
 namespace PopApp.Structure.Mapper
 {
@@ -18,6 +17,7 @@ namespace PopApp.Structure.Mapper
             CreateMap<Document, DocumentDto>().ReverseMap();
             CreateMap<Container, ContainerDto>().ReverseMap();
             CreateMap<Company, CompanyDto>().ReverseMap();
+            CreateMap<Schedule, ScheduleDto>().ReverseMap();
             CreateMap<Logger, LoggerDto>().ReverseMap();
         }
     }

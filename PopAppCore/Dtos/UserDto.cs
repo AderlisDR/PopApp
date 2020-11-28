@@ -2,7 +2,7 @@
 
 namespace PopApp.Core.Dtos
 {
-    public class UserDto
+    public sealed class UserDto
     {
         public int UserId { get; set; }
         public string UserName { get; set; }

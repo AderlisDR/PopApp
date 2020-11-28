@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PopApp.Core.Entities;
+using PopAppCore.Entities;
 
 namespace PopApp.Structure.Data
 {
@@ -15,5 +16,6 @@ namespace PopApp.Structure.Data
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vessel> Vessels { get; set; }
         public virtual DbSet<Logger> Loggers { get; set; }
+        public virtual DbSet<Schedule> Schedules { get; set; }
     }
 }
