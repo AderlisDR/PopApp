@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PopApp.Core.Dtos
 {
-    public class FreigthDto
+    public sealed class FreigthDto
     {
         public int FreigthId { get; set; }
         public string FreigthCode { get; set; }

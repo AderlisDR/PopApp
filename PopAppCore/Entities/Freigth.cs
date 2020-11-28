@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PopApp.Core.Entities
 {
-    public class Freigth
+    public sealed class Freigth
     {
         [Key]
         public int FreigthId { get; set; }

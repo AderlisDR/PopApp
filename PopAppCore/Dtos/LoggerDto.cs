@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PopApp.Core.Dtos
 {
-    public class LoggerDto
+    public sealed class LoggerDto
     {
         public int LoggerId { get; set; }
         public string Screen { get; set; }

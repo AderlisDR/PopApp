@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PopApp.Core.Dtos
 {
-    public class ProductDto
+    public sealed class ProductDto
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }

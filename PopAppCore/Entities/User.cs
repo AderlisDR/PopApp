@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PopApp.Core.Entities
 {
-    public class User
+    public sealed class User
     {
         [Key]
         public int UserId { get; set; }
