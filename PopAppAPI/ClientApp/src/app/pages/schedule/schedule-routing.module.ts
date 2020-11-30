@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../services/guards/auth.guard';
 import { RoleGuard } from '../../services/guards/role.guard';
 import { ScheduleAddContainerComponent } from './schedule-add-container/schedule-add-container.component';
-import { ScheduleAddComponent } from './schedule-add/schedule-add.component';
 import { ScheduleConsultComponent } from './schedule-consult/schedule-consult.component';
 
 const routes: Routes = [
@@ -13,12 +12,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, RoleGuard]
   },
   {
-    path: 'add',
-    component: ScheduleAddComponent,
-    canActivate: [AuthGuard, RoleGuard]
-  },
-  {
-    path: ':id/add-container',
+    path: ':id/containers',
     component: ScheduleAddContainerComponent,
     canActivate: [AuthGuard, RoleGuard]
   }

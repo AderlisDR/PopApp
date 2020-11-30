@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
-import { ContainerFormComponent } from './container-form/container-form.component';
 import { ContainerGridComponent } from './container-grid/container-grid.component';
 import { ContainerRoutingModule } from './container-routing.module';
 
@@ -10,8 +9,7 @@ import { ContainerRoutingModule } from './container-routing.module';
     ContainerRoutingModule
   ],
   declarations: [
-    ContainerGridComponent,
-    ContainerFormComponent
+    ContainerGridComponent
   ]
 })
 export class ContainerModule { }

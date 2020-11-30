@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PopApp.Core.Dtos
+﻿namespace PopApp.Core.Dtos
 {
     public sealed class FreigthDto
     {

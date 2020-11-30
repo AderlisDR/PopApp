@@ -55,6 +55,11 @@ export const AppRoutes: Routes = [
         path: 'vessel',
         canActivate: [AuthGuard, RoleGuard],
         loadChildren: () => import('./pages/vessel/vessel.module').then(module => module.VesselModule)
+      },
+      {
+        path: 'schedule',
+        canActivate: [AuthGuard, RoleGuard],
+        loadChildren: () => import('./pages/schedule/schedule.module').then(module => module.ScheduleModule)
       }
     ]
   },

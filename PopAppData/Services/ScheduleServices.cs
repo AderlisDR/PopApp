@@ -48,7 +48,6 @@ namespace PopAppData.Services
                 scheduleUpdate.ScheduleDate = schedule.ScheduleDate;
                 scheduleUpdate.IsActive = schedule.IsActive;
                 scheduleUpdate.CreateAt = DateTime.Now;
-                scheduleUpdate.ContainerSchedule = schedule.ContainerSchedule;
             }
         }
     }

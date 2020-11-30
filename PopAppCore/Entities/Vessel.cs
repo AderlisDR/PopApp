@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace PopApp.Core.Entities
 {
-    public sealed class Vessel
+    public class Vessel
     {
         [Key]
         public int VesselId { get; set; }
@@ -17,5 +15,6 @@ namespace PopApp.Core.Entities
         public string VesselArrival { get; set; }
         public bool IsActive { get; set; }
         public virtual IEnumerable<Document> Documents { get; set; }
+        public virtual IEnumerable<Container> Containers { get; set; }
     }
 }

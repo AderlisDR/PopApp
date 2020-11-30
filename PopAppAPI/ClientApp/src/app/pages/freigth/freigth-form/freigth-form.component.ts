@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -10,24 +11,22 @@ import { FreigthService } from '../../../services/freigth.service';
   styleUrls: ['./freigth-form.component.scss']
 })
 export class FreigthFormComponent implements OnInit {
-
   freigthForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder , private freigthService: FreigthService) { }
+  constructor(private formBuilder: FormBuilder,
+    private freigthService: FreigthService) { }
 
   ngOnInit() {
     this.formBuild();
   }
 
   private formBuild() {
-    this.freigthForm = this.formBuilder.group(
-      {
-        freigthCode: new FormControl('' , Validators.required),
-        freigthDescription: new FormControl('' , Validators.required),
-        freigthType: new FormControl('' , Validators.required),
-        freigthWeigth: new FormControl(0 , Validators.required)
-      }
-    );
+    this.freigthForm = this.formBuilder.group({
+      freigthCode: ['', [Validators.required]],
+      freigthDescription: ['', [Validators.required]],
+      freigthType: ['', [Validators.required]],
+      freigthWeigth: [0, [Validators.required]]
+    });
   }
 
   createFreigth() {
@@ -40,24 +39,29 @@ export class FreigthFormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Save!'
     }).then((result) => {
-      const freigth: Freigth = {
-        freigthCode: this.freigthForm.controls.freigthCode.value,
-        freigthDescription: this.freigthForm.controls.freigthDescription.value,
-        freigthType: this.freigthForm.controls.freigthType.value,
-        freigthWeigth: this.freigthForm.controls.freigthWeigth.value,
-      };
-
-      this.freigthService.PostFreigth(freigth).then(resp => {}).catch(err => {});
-
-      this.freigthForm.reset();
       if (result.isConfirmed) {
-        Swal.fire(
-          'Complete!',
-          'Your file has been Saved.',
-          'success'
-        );
+        const freigth: Freigth = {
+          freigthCode: this.freigthForm.controls.freigthCode.value,
+          freigthDescription: this.freigthForm.controls.freigthDescription.value,
+          freigthType: this.freigthForm.controls.freigthType.value,
+          freigthWeigth: this.freigthForm.controls.freigthWeigth.value,
+        };
+
+        this.freigthService.PostFreigth(freigth).then(() => {
+          this.freigthForm.reset();
+          Swal.fire(
+            'Complete!',
+            'Your file has been Saved.',
+            'success'
+          );
+        }).catch((error: HttpErrorResponse) => {
+          Swal.fire(
+            'Error!',
+            error.error,
+            'error'
+          );
+        });
       }
     });
   }
-
 }

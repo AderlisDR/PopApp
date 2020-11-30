@@ -5,4 +5,5 @@ export interface Freigth {
   freigthType?: string;
   freigthWeigth?: number;
   isActive?: boolean;
+  containerId?: number;
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PopAppCore.Dtos
 {
@@ -12,6 +9,5 @@ namespace PopAppCore.Dtos
         public string Process { get; set; }
         public bool  ContainerCheck { get; set; }
         public  IEnumerable<FreigthScheduleDto> FreigthSchedule { get; set; }
-
     }
 }

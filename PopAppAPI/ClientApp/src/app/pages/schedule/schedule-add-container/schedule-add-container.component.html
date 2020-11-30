@@ -1,3 +1,70 @@
-<p>
-  schedule-add-container works!
-</p>
+<div class="row">
+  <div class="col-12 p-0 d-flex align-items-center mb-3">
+    <span>
+      <h1 class="m-0">Contenedores buque: {{vesselName}}</h1>
+    </span>&nbsp;&nbsp;
+    <span>
+      <button class="btn btn-sm p-0 icon-size-lg" type="button" (click)="openContainerDialog()">
+        <span nz-tooltip nzTooltipTitle="Agregar nuevo contenedor">
+          <i nz-icon nzType="plus-circle" nzTheme="twotone" [nzTwotoneColor]="'#52c41a'"></i>
+        </span>
+      </button>
+    </span>
+  </div>
+
+  <dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="containers"
+    keyExpr="containerId" [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true"
+    [columnAutoWidth]="false" [showBorders]="true" [allowColumnResizing]="true" (onExporting)="onExport()"
+    [focusedRowEnabled]="true" [(focusedRowKey)]="focusedRowKey" [autoNavigateToFocusedRow]="true"
+    (onFocusedRowChanging)="onFocusedRowChanging($event)" (onFocusedRowChanged)="onFocusedRowChanged($event)">
+
+    <dxo-group-panel [visible]="true" [emptyPanelText]="'Arrastre columnas aquí para agrupar'">
+    </dxo-group-panel>
+    <dxo-grouping [autoExpandAll]="false" [texts]="groupPanelTexts"></dxo-grouping>
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [visible]="true" [showInfo]="true" [infoText]="'Página {0} de {1} ({2} registros)'"
+      [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+
+    <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar..." [width]="300">
+    </dxo-search-panel>
+
+    <dxo-export [enabled]="true" fileName="{filename}" [texts]="{exportAll: 'Exportar a Excel'}">
+    </dxo-export>
+
+    <dxi-column dataField="containerType" caption="Tipo" [hidingPriority]="0"></dxi-column>
+
+    <dxi-column dataField="containerPayload" caption="Payload" [hidingPriority]="0"></dxi-column>
+
+    <dxi-column dataField="containerCapacity" caption="Capacidad" [hidingPriority]="0"></dxi-column>
+
+    <dxi-column dataField="containerLenth" caption="Largo" [hidingPriority]="0"></dxi-column>
+
+    <dxi-column dataField="containerWidth" caption="Ancho" [hidingPriority]="0"></dxi-column>
+
+    <dxi-column dataField="containerHeigth" caption="Alto" [hidingPriority]="0"></dxi-column>
+  </dx-data-grid>
+</div>
+
+<hr>
+
+<div class="row mt-3">
+  <div class="card col-12 d-flex justify-content-center p-0">
+    <!-- <h5 class="card-header">Carga contenedor</h5> -->
+    <div class="card-header d-flex align-items-center justify-content-between">
+      <span>
+        <h5 class="m-0">Carga contenedor</h5>
+      </span>
+      <span>
+        <button class="btn btn-sm p-0 icon-size-md" type="button" (click)="openFreigthDialog()">
+          <span nz-tooltip nzTooltipTitle="Agregar nueva carga">
+            <i nz-icon nzType="plus-circle" nzTheme="twotone" [nzTwotoneColor]="'#52c41a'"></i>
+          </span>
+        </button>
+      </span>
+    </div>
+    <div class="card-body">
+      <app-achedule-add-freigth [containerId]="focusedRowKey"></app-achedule-add-freigth>
+    </div>
+  </div>
+</div>

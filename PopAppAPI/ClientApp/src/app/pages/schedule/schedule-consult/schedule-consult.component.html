@@ -1,6 +1,13 @@
-<h1 id="tableLabel">Tabla Producto</h1>
+<div class="row mb-3">
+  <div class="col-md-9 col-sm-12">
+    <h1 id="tableLabel">Agenda de buques</h1>
+  </div>
+  <div class="col-md-3 col-sm-12 d-flex justify-content-end">
+    <button class="btn btn-primary" (click)="openDialog()">Agendar nuevo</button>
+  </div>
+</div>
 
-<dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="productData"
+<dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="schedules"
   [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"
   [showBorders]="false" [allowColumnResizing]="true" (onExporting)="onExport()">
 
@@ -15,34 +22,23 @@
   <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar..." [width]="300">
   </dxo-search-panel>
 
-  <dxo-export [enabled]="true" fileName="{filename}"
-    [texts]="{exportAll: 'Exportar a Excel'}">
+  <dxo-export [enabled]="true" fileName="{filename}" [texts]="{exportAll: 'Exportar a Excel'}">
   </dxo-export>
 
-  <dxi-column dataField="productName" caption="Nombre" [hidingPriority]="0"></dxi-column>
+  <dxi-column dataField="scheduleDate" caption="Fecha llegada" [hidingPriority]="0"></dxi-column>
 
-  <dxi-column dataField="productCategory" caption="Categoria" [hidingPriority]="0"></dxi-column>
+  <dxi-column dataField="vesselId" caption="Buque" [hidingPriority]="0"></dxi-column>
 
-  <dxi-column dataField="productDescription" caption="Categoria" [hidingPriority]="0"></dxi-column>
+  <dxi-column dataField="createdAt" caption="Fecha registro" [hidingPriority]="0"></dxi-column>
 
-  <!-- <dxi-column caption="Acciones" cellTemplate="acciones" [allowExporting]="false"
-  [cssClass]="'text-center'" *ngIf="canManage"></dxi-column>
-<div *dxTemplate="let data of 'acciones'">
-  <div>
-    <button class="mb-2 btn-sm button-party-outline" [routerLink]="['../polling-table', data.data.enclosureId]"
-      *ngIf="canManage || isProvintial">
-      Detalles
-    </button>&nbsp;
-    <button class="mb-2 btn-sm button-party-outline" *ngIf="!data.data.hasCoordinator"
-      (click)="openCreateEnclosureCoordinatorModal(data.data.enclosureId)"
-      matTooltip="Asignar coordinador de recinto" matTooltipPosition="above">
-      &nbsp;<i class="fas fa-user-plus"></i>&nbsp;
-    </button>
-    <button class="btn button-party-outline btn-sm" *ngIf="data.data.hasCoordinator"
-      (click)="openCreateEnclosureCoordinatorModal(data.data.enclosureId, data.data.coordinatorIdentification)"
-      matTooltip="Ver detalles del coordinador de recinto" matTooltipPosition="above">
-      &nbsp;<i class="fas fa-eye"></i>&nbsp;
-    </button>
+  <dxi-column caption="Acciones" cellTemplate="acciones" [allowExporting]="false" [cssClass]="'text-center'"></dxi-column>
+  <div *dxTemplate="let data of 'acciones'">
+    <div>
+      <button class="btn btn-sm btn-outline-primary" [routerLink]="[data.data.vesselId, 'containers']">
+        <span nz-tooltip nzTooltipTitle="Contenedores">
+          <i nz-icon nzType="appstore" nzTheme="fill"></i>
+        </span>
+      </button>
+    </div>
   </div>
-</div> -->
 </dx-data-grid>

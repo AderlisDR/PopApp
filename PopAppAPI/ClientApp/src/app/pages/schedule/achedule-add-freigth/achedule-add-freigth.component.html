@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-12">
+    <nz-skeleton [nzActive]="true" [nzLoading]="isLoading">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel *ngFor="let freigth of displayFreigths" [expanded]="currentFreigth === freigth.freigthId"
+          (opened)="handlePanelExpansionToggle(freigth.freigthId)" hideToggle [disabled]="!freigth.isActive">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Código carga: {{freigth.freigthCode}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{freigth.freigthDescription}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-schedule-add-product [freigthId]="freigth.freigthId"></app-schedule-add-product>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </nz-skeleton>
+  </div>
+</div>
