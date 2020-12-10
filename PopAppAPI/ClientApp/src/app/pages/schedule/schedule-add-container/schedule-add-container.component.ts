@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { UserRole } from 'src/app/enums/user-role.enum';
 import { Container } from '../../../models/container/container';
+import { AuthService } from '../../../services/auth.service';
 import { ContainerFormComponent } from '../../container/container-form/container-form.component';
 import { FreigthFormComponent } from '../../freigth/freigth-form/freigth-form.component';
 
@@ -12,6 +14,7 @@ import { FreigthFormComponent } from '../../freigth/freigth-form/freigth-form.co
 export class ScheduleAddContainerComponent implements OnInit {
   vesselName = 'Paparipo';
   focusedRowKey = 0;
+  isAdmin = false;
   containers: Container[] = [
     { containerId: 0, containerType: 'Un tipo', containerPayload: 1, containerCapacity: 2, containerLenth: 3, containerWidth: 4, containerHeigth: 5 },
     { containerId: 1, containerType: 'Otro tipo', containerPayload: 2, containerCapacity: 3, containerLenth: 4, containerWidth: 5, containerHeigth: 6 }
@@ -22,9 +25,12 @@ export class ScheduleAddContainerComponent implements OnInit {
     groupContinuesMessage: 'Continúa en la siguiente página'
   };
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    const currentUser = this.authService.getCurrentUser();
+    this.isAdmin = currentUser.userRole === UserRole.Admin;
   }
 
   onFocusedRowChanging(e) {

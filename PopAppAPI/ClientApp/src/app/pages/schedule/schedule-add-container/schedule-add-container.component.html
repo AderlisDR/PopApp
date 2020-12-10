@@ -3,7 +3,7 @@
     <span>
       <h1 class="m-0">Contenedores buque: {{vesselName}}</h1>
     </span>&nbsp;&nbsp;
-    <span>
+    <span *ngIf="isAdmin">
       <button class="btn btn-sm p-0 icon-size-lg" type="button" (click)="openContainerDialog()">
         <span nz-tooltip nzTooltipTitle="Agregar nuevo contenedor">
           <i nz-icon nzType="plus-circle" nzTheme="twotone" [nzTwotoneColor]="'#52c41a'"></i>
@@ -14,7 +14,7 @@
 
   <dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="containers"
     keyExpr="containerId" [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true"
-    [columnAutoWidth]="false" [showBorders]="true" [allowColumnResizing]="true" (onExporting)="onExport()"
+    [columnAutoWidth]="false" [showBorders]="true" [allowColumnResizing]="true"
     [focusedRowEnabled]="true" [(focusedRowKey)]="focusedRowKey" [autoNavigateToFocusedRow]="true"
     (onFocusedRowChanging)="onFocusedRowChanging($event)" (onFocusedRowChanged)="onFocusedRowChanged($event)">
 
@@ -50,12 +50,11 @@
 
 <div class="row mt-3">
   <div class="card col-12 d-flex justify-content-center p-0">
-    <!-- <h5 class="card-header">Carga contenedor</h5> -->
     <div class="card-header d-flex align-items-center justify-content-between">
       <span>
         <h5 class="m-0">Carga contenedor</h5>
       </span>
-      <span>
+      <span *ngIf="isAdmin">
         <button class="btn btn-sm p-0 icon-size-md" type="button" (click)="openFreigthDialog()">
           <span nz-tooltip nzTooltipTitle="Agregar nueva carga">
             <i nz-icon nzType="plus-circle" nzTheme="twotone" [nzTwotoneColor]="'#52c41a'"></i>

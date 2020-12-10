@@ -11,6 +11,8 @@
             <mat-panel-description>
               {{freigth.freigthDescription}}
             </mat-panel-description>
+            <mat-icon *ngIf="evaluationStatus(freigth.freigthId) === evaluationStatuses.Approved" class="text-success">check_circle</mat-icon>
+            <mat-icon *ngIf="evaluationStatus(freigth.freigthId) === evaluationStatuses.Reported" class="text-danger">highlight_off</mat-icon>
           </mat-expansion-panel-header>
           <app-schedule-add-product [freigthId]="freigth.freigthId"></app-schedule-add-product>
         </mat-expansion-panel>
