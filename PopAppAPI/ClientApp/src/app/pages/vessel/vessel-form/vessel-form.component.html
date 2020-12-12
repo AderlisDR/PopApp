@@ -4,40 +4,28 @@
 
     <form [formGroup]="vesselForm" (ngSubmit)="createVessel()">
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Vessel Name</mat-label>
-          <input matInput placeholder="Ex. San Francisco" formControlName="vesselName">
-        </mat-form-field>
+        <input nz-input placeholder="Nombre del buque" formControlName="vesselName" />
+        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselName.hasError('required')">El nombre es requerido</span>
       </div>
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Vessel Code</mat-label>
-          <input matInput placeholder="Ex. San Francisco" formControlName="vesselCode">
-        </mat-form-field>
+        <input nz-input placeholder="Codigo del buque" formControlName="vesselCode" />
+        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselCode.hasError('required')">El Codigo es requerido</span>
       </div>
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Vessel Imo</mat-label>
-          <input matInput placeholder="Ex. San Francisco" formControlName="vesselImo">
-        </mat-form-field>
+        <input nz-input placeholder="Imo del buque" formControlName="vesselImo" />
+        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselImo.hasError('required')">El Imo es requerido</span>
       </div>
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Vessel Flag</mat-label>
-          <input matInput placeholder="Ex. San Francisco" formControlName="vesselFlag">
-        </mat-form-field>
+        <input nz-input placeholder="Bandera del Buque" formControlName="vesselFlag" />
+        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselFlag.hasError('required')">La Bandera es requerido</span>
       </div>
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Vessel Slora</mat-label>
-          <input matInput placeholder="Ex. San Francisco" formControlName="vesselSlora">
-        </mat-form-field>
+        <input nz-input placeholder="Slora del buque" formControlName="vesselSlora" />
+        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselSlora.hasError('required')">El Slora es requerido</span>
       </div>
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Vessel Arrival</mat-label>
-          <input matInput placeholder="Ex. San Francisco" formControlName="vesselArrival">
-        </mat-form-field>
+        <input nz-input placeholder="Procedencia del buque" formControlName="vesselArrival" />
+        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselArrival.hasError('required')">La Procedencia es requerido</span>
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-block" [disabled]="!vesselForm.valid">Send</button>
