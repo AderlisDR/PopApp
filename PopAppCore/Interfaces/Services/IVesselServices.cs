@@ -1,7 +1,8 @@
 ﻿using PopApp.Core.Entities;
+using PopAppCore.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PopApp.Core.Interfaces.Services
@@ -13,5 +14,6 @@ namespace PopApp.Core.Interfaces.Services
         Task CreatetVessel(Vessel vessel);
         Task UpdateVessel(int id, Vessel vessel);
         Task DeleteVessel(int id);
+        Task<List<VesselComboDto>> GetVesselsForComboByCondition(Expression<Func<Vessel, bool>> expression);
     }
 }

@@ -1,0 +1,41 @@
+<div class="card">
+  <h5 class="card-header">Carga de Documento de Buque</h5>
+  <div class="card-body">
+    <form [formGroup]="vesselDocumentForm" (ngSubmit)="onSubmit()">
+      <div class="clearfix">
+        <div class="form-group">
+          <label for="vessel"><b><span class="text-danger">*</span>Buque:</b></label>
+          <nz-select id="vessel" nzShowSearch nzAllowClear nzPlaceHolder="Seleccione un buque"
+            formControlName="vesselId" nzNotFoundContent="No hay opciones" (ngModelChange)="handleSelectChange()">
+            <nz-option *ngFor="let vessel of vessels" [nzLabel]="vessel.vesselName + ' - ' + vessel.vesselCode"
+              [nzValue]="vessel.vesselId">
+            </nz-option>
+          </nz-select>
+          <span
+            *ngIf="vesselDocumentForm.get('vesselId').touched && vesselDocumentForm.get('vesselId').hasError('required') || showVesselRequiredError"
+            class="text-danger">El buque es requerido.</span>
+        </div>
+        <div class="form-group">
+          <label for="description"><b><span class="text-danger">*</span>Descripción:</b></label>
+          <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+          <span
+            *ngIf="vesselDocumentForm.get('description').touched && vesselDocumentForm.get('description').hasError('required')"
+            class="text-danger">La descripción es requerida.</span>
+        </div>
+        <div class="form-group">
+          <label for="image"><b><span class="text-danger">*</span>Imagen:</b></label>
+          <nz-upload id="image" nzAction="{{baseUrl}}api/documents/can-upload" nzListType="picture-card"
+            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1" [nzShowUploadList]="showUploadList"
+            [nzPreview]="handlePreview" [nzFileType]="acceptedFileTypes" formControlName="image" [nzBeforeUpload]="handleBeforeUpload">
+            <i nz-icon nzType="plus"></i>
+            <div class="ant-upload-text">Cargar imagen</div>
+          </nz-upload>
+          <span
+            *ngIf="vesselDocumentForm.get('image').touched && fileList.length < 1 || showImageRequiredError"
+            class="text-danger">La imagen es requerida.</span>
+        </div>
+        <button class="btn btn-lg btn-primary" type="submit" [disabled]="vesselDocumentForm.invalid">Cargar imagen</button>
+      </div>
+    </form>
+  </div>
+</div>

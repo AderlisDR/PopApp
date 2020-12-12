@@ -8,7 +8,9 @@ import { CurrentUser } from '../models/account/current-user';
 import { LoginRequest } from '../models/account/login-request';
 import { createAbilityFor } from './functions/create-ability-for.function';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
     currentUserSubject = new BehaviorSubject(this.getCurrentUser());
 
@@ -41,7 +43,7 @@ export class AuthService {
     public login(token: string) {
         localStorage.setItem('token', token);
         this.updateAbilityRulesAndCurrentUserSubject();
-        this.router.navigateByUrl('/counter');
+        this.router.navigateByUrl('/dashboard');
     }
 
     public isAuthenticated(): boolean {

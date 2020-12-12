@@ -10,7 +10,6 @@ namespace PopApp.Core.Entities
     {
         [Key]
         public int ContainerId { get; set; }
-
         public string ContainerType { get; set; }
         [Column(TypeName = "decimal(4,2)")]
         public decimal? ContainerPayload { get; set; }

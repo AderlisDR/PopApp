@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PopApp.Core.Entities;
 using PopApp.Core.Interfaces.Services;
+using PopAppCore.Dtos;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PopAppAPI.Controllers
 {
     [Route("api/vessels")]
     [ApiController]
+    [Authorize]
     public class VesselController : ControllerBase
     {
-        private readonly IVesselServices _repo;
-        public VesselController(IVesselServices repo)
+        private readonly IVesselServices _vesselServices;
+        public VesselController(IVesselServices vesselServices)
         {
-            _repo = repo;
+            _vesselServices = vesselServices;
         }
 
         [HttpGet]
@@ -24,7 +25,7 @@ namespace PopAppAPI.Controllers
         {
             try
             {
-                var vessels = await _repo.GetVessels();
+                var vessels = await _vesselServices.GetVessels();
                 return Ok(vessels);
 
             }catch(Exception e)
@@ -38,7 +39,7 @@ namespace PopAppAPI.Controllers
         {
             try
             {
-                var vessel = await _repo.GetVessel(id);
+                var vessel = await _vesselServices.GetVessel(id);
                 return Ok(vessel);
 
             }catch(Exception e)
@@ -52,7 +53,7 @@ namespace PopAppAPI.Controllers
         {
             try
             {
-                await _repo.CreatetVessel(vessel);
+                await _vesselServices.CreatetVessel(vessel);
                 return Ok();
 
             }catch(Exception e)
@@ -66,7 +67,7 @@ namespace PopAppAPI.Controllers
         {
             try
             {
-                await _repo.UpdateVessel(id, vessel);
+                await _vesselServices.UpdateVessel(id, vessel);
                 return Ok();
 
             }catch(Exception e)
@@ -80,12 +81,27 @@ namespace PopAppAPI.Controllers
         {
             try
             {
-                await _repo.DeleteVessel(id);
+                await _vesselServices.DeleteVessel(id);
                 return Ok();
 
             }catch(Exception e)
             {
                 return Ok(e.Message);
+            }
+        }
+
+        [HttpGet("for-combo")]
+        public async Task<IActionResult> GetActiveVesselsForCombo()
+        {
+            try
+            {
+                List<VesselComboDto> combo = await _vesselServices.GetVesselsForComboByCondition(vessel => vessel.IsActive);
+
+                return Ok(combo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }
