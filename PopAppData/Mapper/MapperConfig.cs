@@ -19,6 +19,7 @@ namespace PopApp.Structure.Mapper
             CreateMap<Company, CompanyDto>().ReverseMap();
             CreateMap<Schedule, ScheduleDto>().ReverseMap();
             CreateMap<Logger, LoggerDto>().ReverseMap();
+            CreateMap<ContainerTypeModel, ContainerTypeModelDto>().ReverseMap();
         }
     }
 }

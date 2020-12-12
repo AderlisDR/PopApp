@@ -1,51 +1,31 @@
 <div class="card">
   <div class="card-header text-center text-white bg-primary"> Company Form</div>
-  <div class="card-header">
-
+  <div class="card-body">
+  
     <form [formGroup]="companyForm" (ngSubmit)="createCompany()">
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Company name</mat-label>
-          <input matInput placeholder="Ex. San Francisco" class="form-control" formControlName="companyName">
-          <mat-error *ngIf="companyForm.controls.companyName.hasError('required') && companyForm.controls.companyName.touched">
-            Company Name is Required
-          </mat-error>
-        </mat-form-field>
+        <input nz-input placeholder="Nombre de la Compañia" formControlName="companyName" />
+        <span class="bg-danger text-white" *ngIf="companyForm.controls.companyName.hasError('required')">El nombre es requerido</span>
       </div>
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Company Code</mat-label>
-          <input matInput placeholder="Ex. San Francisco" class="form-control" formControlName="companyCode">
-          <mat-error *ngIf="companyForm.controls.companyCode.hasError('required') && companyForm.controls.companyName.touched">
-            Company Code is Required
-          </mat-error>
-        </mat-form-field>
+        <input nz-input placeholder="Codigo de la Compañia" formControlName="companyCode" />
+        <span class="bg-danger text-white" *ngIf="companyForm.controls.companyCode.hasError('required')">El Codigo es requerido</span>
       </div>
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Company Adrees</mat-label>
-          <input matInput placeholder="Ex. San Francisco" class="form-control" formControlName="companyAdress">
-          <mat-error *ngIf="companyForm.controls.companyAdress.hasError('required') && companyForm.controls.companyName.touched">
-            Company Adress is Required
-          </mat-error>
-        </mat-form-field>
+        <input nz-input placeholder="Email de la Compañia" formControlName="companyEmail" />
+        <span class="bg-danger text-white" *ngIf="companyForm.controls.companyEmail.hasError('required')">El Email es requerido</span>
       </div>
       <div class="form-group">
-        <mat-form-field class="example-full-width">
-          <mat-label>Telephone</mat-label>
-          <span matPrefix>+1 &nbsp;</span>
-          <input type="tel" matInput placeholder="555-555-1234" formControlName="companyPhone">
-          <mat-error *ngIf="companyForm.controls.companyPhone.hasError('required') && companyForm.controls.companyName.touched">
-            Company Phone is Required
-          </mat-error>
-        </mat-form-field>
+        <input nz-input placeholder="Direccion de la Compañia" formControlName="companyAdress" />
+        <span class="bg-danger text-white" *ngIf="companyForm.controls.companyAdress.hasError('required')">La Direccion es requerido</span>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block" [disabled]="!companyForm.valid">send</button>
+        <input nz-input placeholder="Telefono de la Compañia" formControlName="companyPhone" />
+        <span class="bg-danger text-white" *ngIf="companyForm.controls.companyPhone.hasError('required')">La Telefono es requerido</span>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" [disabled]="!companyForm.valid">Enviar</button>
       </div>
     </form>
-
-
   </div>
 </div>
-
