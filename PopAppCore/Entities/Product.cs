@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PopApp.Core.Entities
+namespace PopAppCore.Entities
 {
     public sealed class Product
     {

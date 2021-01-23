@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PopApp.Core.Entities
+namespace PopAppCore.Entities
 {
-    public class Freigth
+    public sealed class Freigth
     {
         [Key]
         public int FreigthId { get; set; }
@@ -13,7 +13,5 @@ namespace PopApp.Core.Entities
         [Column(TypeName = "decimal(4,2)")]
         public decimal FreigthWeigth { get; set; }
         public bool IsActive { get; set; }
-        public int ContainerId { get; set; }
-        public virtual Container Container { get; set; }
     }
 }

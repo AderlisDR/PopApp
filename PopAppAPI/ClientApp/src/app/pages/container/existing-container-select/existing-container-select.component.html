@@ -1,0 +1,24 @@
+<div class="card">
+  <h5 class="card-header">Contenedores existentes</h5>
+  <div class="card-body">
+    <nz-skeleton [nzActive]="true" [nzLoading]="isLoading">
+      <div class="clearfix">
+        <div class="form-group">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Seleccione uno o más contenedores" nzMode="multiple"
+            nzNotFoundContent="No hay opciones" [(ngModel)]="selectedContainers"
+            (ngModelChange)="handleSelectedContainersChange()">
+            <nz-option *ngFor="let container of containers"
+              [nzLabel]="'Tipo: ' + container.containerType + ', Carga útil: ' + container.containerPayload + ', Capacidad: ' + container.containerCapacity + ', Longitud: ' + container.containerLenth + ', Anchura' + container.containerWidth + ', Altura' + container.containerHeigth"
+              [nzValue]="container.containerId">
+            </nz-option>
+          </nz-select>
+        </div>
+        <mat-action-row>
+          <button class="btn btn-sm btn-primary" (click)="addContainers()" [disabled]="addContainersDisabled">Agregar
+            contenedores</button>&nbsp;&nbsp;
+          <button class="btn btn-sm btn-secondary" (click)="createNewContainer()">Crear nuevo contenedor</button>
+        </mat-action-row>
+      </div>
+    </nz-skeleton>
+  </div>
+</div>

@@ -1,35 +1,41 @@
-<h1 id="tableLabel">Tabla Producto</h1>
+<nz-skeleton [nzActive]="true" [nzLoading]="isLoading">
+  <div class="row mb-3">
+    <div class="col-md-9 col-sm-12">
+      <h1 class="m-0">Consulta de Productos</h1>
+    </div>
+    <div class="col-md-3 col-sm-12 d-flex justify-content-end">
+      <button *ngIf="isAdmin" class="btn btn-sm p-0 icon-size-lg" (click)="openDialog()">
+        <span nz-tooltip nzTooltipTitle="Agregar nuevo producto">
+          <i nz-icon nzType="plus-circle" nzTheme="twotone" [nzTwotoneColor]="'#52c41a'"></i>
+        </span></button>
+    </div>
+  </div>
 
-<p>This component demonstrates fetching data from the server.</p>
+  <dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="productData"
+    [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"
+    [showBorders]="false" [allowColumnResizing]="true" (onExporting)="onExport()">
 
-<p *ngIf="!productData"><em>Loading...</em></p>
+    <dxo-group-panel [visible]="true" [emptyPanelText]="'Arrastre columnas aquí para agrupar'">
+    </dxo-group-panel>
+    <dxo-grouping [autoExpandAll]="false" [texts]="groupPanelTexts"></dxo-grouping>
 
-<dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="productData"
-  [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"
-  [showBorders]="false" [allowColumnResizing]="true" (onExporting)="onExport()">
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [visible]="true" [showInfo]="true" [infoText]="'Página {0} de {1} ({2} registros)'"
+      [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
 
-  <dxo-group-panel [visible]="true" [emptyPanelText]="'Arrastre columnas aquí para agrupar'">
-  </dxo-group-panel>
-  <dxo-grouping [autoExpandAll]="false" [texts]="groupPanelTexts"></dxo-grouping>
+    <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar..." [width]="300">
+    </dxo-search-panel>
 
-  <dxo-paging [pageSize]="10"></dxo-paging>
-  <dxo-pager [visible]="true" [showInfo]="true" [infoText]="'Página {0} de {1} ({2} registros)'"
-    [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+    <dxo-export [enabled]="true" fileName="{filename}" [texts]="{exportAll: 'Exportar a Excel'}">
+    </dxo-export>
 
-  <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar..." [width]="300">
-  </dxo-search-panel>
+    <dxi-column dataField="productName" caption="Nombre" [hidingPriority]="0"></dxi-column>
+    <dxi-column dataField="productCategory" caption="Categoria" [hidingPriority]="0"></dxi-column>
+    <dxi-column dataField="productDescription" caption="Categoria" [hidingPriority]="0"></dxi-column>
 
-  <dxo-export [enabled]="true" fileName="{filename}"
-    [texts]="{exportAll: 'Exportar a Excel'}">
-  </dxo-export>
 
-  <dxi-column dataField="productName" caption="Nombre" [hidingPriority]="0"></dxi-column>
-  <dxi-column dataField="productCategory" caption="Categoria" [hidingPriority]="0"></dxi-column>
-  <dxi-column dataField="productDescription" caption="Categoria" [hidingPriority]="0"></dxi-column>
 
-  
-
-  <!-- <dxi-column caption="Acciones" cellTemplate="acciones" [allowExporting]="false"
+    <!-- <dxi-column caption="Acciones" cellTemplate="acciones" [allowExporting]="false"
   [cssClass]="'text-center'" *ngIf="canManage"></dxi-column>
 <div *dxTemplate="let data of 'acciones'">
   <div>
@@ -49,4 +55,5 @@
     </button>
   </div>
 </div> -->
-</dx-data-grid>
+  </dx-data-grid>
+</nz-skeleton>

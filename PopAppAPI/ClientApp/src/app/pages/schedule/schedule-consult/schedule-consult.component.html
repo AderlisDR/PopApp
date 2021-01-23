@@ -3,44 +3,51 @@
     <h1 id="tableLabel">Agenda de buques</h1>
   </div>
   <div class="col-md-3 col-sm-12 d-flex justify-content-end">
-    <button *ngIf="isAdmin" class="btn btn-primary" (click)="openDialog()">Agendar nuevo</button>
+    <button *ngIf="isAdmin" class="btn btn-sm p-0 icon-size-lg" (click)="openDialog()">
+      <span nz-tooltip nzTooltipTitle="Agendar nuevo">
+        <i nz-icon nzType="plus-circle" nzTheme="twotone" [nzTwotoneColor]="'#52c41a'"></i>
+      </span>
+    </button>
     <nz-date-picker *ngIf="isUser" [formControl]="date" (ngModelChange)="handleDateChange($event)"
-    [nzDisabledDate]="disabledDate" nzPlaceHolder="Filtrar por fecha" nzSize="large"></nz-date-picker>
+      [nzDisabledDate]="disabledDate" nzPlaceHolder="Filtrar por fecha" nzSize="large"></nz-date-picker>
   </div>
 </div>
 
-<dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="schedules"
-  [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"
-  [showBorders]="false" [allowColumnResizing]="true" (onExporting)="onExport()">
+<nz-skeleton [nzActive]="true" [nzLoading]="isLoading">
+  <dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="schedules"
+    [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"
+    [showBorders]="false" [allowColumnResizing]="true">
 
-  <dxo-group-panel [visible]="true" [emptyPanelText]="'Arrastre columnas aquí para agrupar'">
-  </dxo-group-panel>
-  <dxo-grouping [autoExpandAll]="false" [texts]="groupPanelTexts"></dxo-grouping>
+    <dxo-group-panel [visible]="true" [emptyPanelText]="'Arrastre columnas aquí para agrupar'">
+    </dxo-group-panel>
+    <dxo-grouping [autoExpandAll]="false" [texts]="groupPanelTexts"></dxo-grouping>
 
-  <dxo-paging [pageSize]="10"></dxo-paging>
-  <dxo-pager [visible]="true" [showInfo]="true" [infoText]="'Página {0} de {1} ({2} registros)'"
-    [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [visible]="true" [showInfo]="true" [infoText]="'Página {0} de {1} ({2} registros)'"
+      [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
 
-  <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar..." [width]="300">
-  </dxo-search-panel>
+    <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar..." [width]="300">
+    </dxo-search-panel>
 
-  <dxo-export [enabled]="true" fileName="{filename}" [texts]="{exportAll: 'Exportar a Excel'}">
-  </dxo-export>
+    <dxo-export [enabled]="true" fileName="{filename}" [texts]="{exportAll: 'Exportar a Excel'}">
+    </dxo-export>
 
-  <dxi-column dataField="scheduleDate" caption="Fecha llegada" [hidingPriority]="0"></dxi-column>
+    <dxi-column dataField="scheduleDate" dataType="date" caption="Fecha llegada" [hidingPriority]="0"></dxi-column>
 
-  <dxi-column dataField="vesselId" caption="Buque" [hidingPriority]="0"></dxi-column>
+    <dxi-column dataField="vesselId" caption="Buque" [hidingPriority]="0"></dxi-column>
 
-  <dxi-column dataField="createdAt" caption="Fecha registro" [hidingPriority]="0"></dxi-column>
+    <dxi-column dataField="createAt" dataType="date" caption="Fecha registro" [hidingPriority]="0"></dxi-column>
 
-  <dxi-column caption="Acciones" cellTemplate="acciones" [allowExporting]="false" [cssClass]="'text-center'"></dxi-column>
-  <div *dxTemplate="let data of 'acciones'">
-    <div>
-      <button class="btn btn-sm btn-outline-primary" [routerLink]="[data.data.vesselId, 'containers']">
-        <span nz-tooltip nzTooltipTitle="Contenedores">
-          <i nz-icon nzType="appstore" nzTheme="fill"></i>
-        </span>
-      </button>
+    <dxi-column caption="Acciones" cellTemplate="acciones" [allowExporting]="false" [cssClass]="'text-center'">
+    </dxi-column>
+    <div *dxTemplate="let data of 'acciones'">
+      <div>
+        <button class="btn btn-sm btn-outline-primary" [routerLink]="[data.data.scheduleId, 'containers']">
+          <span nz-tooltip nzTooltipTitle="Contenedores">
+            <i nz-icon nzType="appstore" nzTheme="fill"></i>
+          </span>
+        </button>
+      </div>
     </div>
-  </div>
-</dx-data-grid>
+  </dx-data-grid>
+</nz-skeleton>

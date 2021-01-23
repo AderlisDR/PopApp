@@ -1,5 +1,4 @@
-﻿using PopApp.Core.Entities;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PopAppCore.Entities

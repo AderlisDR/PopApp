@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as differenceInCalendarDays from 'date-fns/difference_in_calendar_days';
 import Swal from 'sweetalert2';
+import { Schedule } from '../../../models/schedule/schedule';
 import { VesselCombo } from '../../../models/vessel/vessel-combo';
+import { NotificationService } from '../../../services/notification.service';
+import { ScheduleService } from '../../../services/schedule.service';
 import { VesselService } from '../../../services/vessel.service';
 
 @Component({
@@ -18,9 +21,12 @@ export class ScheduleAddVesselComponent implements OnInit {
   showVesselRequiredError: boolean;
 
   constructor(private formBuilder: FormBuilder,
-    private vesselService: VesselService) { }
+    private vesselService: VesselService,
+    private scheduleService: ScheduleService,
+    private norificationService: NotificationService) { }
 
   ngOnInit() {
+    this.getVesselCombo();
     this.buildForm();
   }
 
@@ -38,7 +44,7 @@ export class ScheduleAddVesselComponent implements OnInit {
   buildForm() {
     this.scheduleVesselForm = this.formBuilder.group({
       vesselId: [Validators.required],
-      date: [null, Validators.required]
+      date: [new Date(), Validators.required]
     });
   }
 
@@ -50,12 +56,18 @@ export class ScheduleAddVesselComponent implements OnInit {
     return differenceInCalendarDays(current, this.today) < 0;
   }
 
-  handleDateChange(selectedDate: Date) {
-    //
-  }
-
   onSubmit() {
+    this.norificationService.showLoading();
+    const scheduleVesselRequest: Schedule = {
+      vesselId: this.scheduleVesselForm.controls.vesselId.value,
+      scheduleDate: this.scheduleVesselForm.controls.date.value
+    };
 
+    this.scheduleService.PostSchedule(scheduleVesselRequest).then(() => {
+      this.scheduleVesselForm.reset();
+      this.norificationService.showSuccessMessage('Buque agendado con éxito');
+    }).catch((error: HttpErrorResponse) => {
+      this.norificationService.showErrorMessage(error.error);
+    });
   }
-
 }

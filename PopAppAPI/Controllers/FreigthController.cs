@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PopApp.Core.Dtos;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PopAppCore.Dtos;
+using PopAppCore.Interfaces.Services;
 
 namespace PopAppMaster.Api.Controllers
 {
@@ -17,6 +17,7 @@ namespace PopAppMaster.Api.Controllers
     {
         private readonly IFreigthServices _repo;
         private readonly IMapper _mapper;
+
         public FreigthController(IFreigthServices repo, IMapper mapper)
         {
             _repo = repo;
@@ -35,7 +36,7 @@ namespace PopAppMaster.Api.Controllers
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -46,28 +47,29 @@ namespace PopAppMaster.Api.Controllers
             {
                 var freigth = await _repo.GetFreigth(id);
                 var freigthDto = _mapper.Map<FreigthDto>(freigth);
-                return Ok(freigthDto);
 
+                return Ok(freigthDto);
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostFreigth(FreigthDto freigthDto)
+        public async Task<IActionResult> PostFreigth([FromBody] FreigthDto freigthDto)
         {
             try
             {
                 var freigth = _mapper.Map<Freigth>(freigthDto);
                 freigth.IsActive = true;
-                await _repo.CreateFreigth(freigth);
-                return Ok("Freigth was created");
+                int freigthId = await _repo.CreateFreigth(freigth);
+
+                return Ok(freigthId);
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -83,7 +85,7 @@ namespace PopAppMaster.Api.Controllers
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -98,7 +100,7 @@ namespace PopAppMaster.Api.Controllers
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
     }

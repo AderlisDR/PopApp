@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
 using PopApp.Structure.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using PopAppCore.Interfaces.Services;
 
 namespace PopApp.Structure.Services
 {

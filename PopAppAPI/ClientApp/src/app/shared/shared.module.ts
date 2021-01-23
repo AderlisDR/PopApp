@@ -16,6 +16,7 @@ import { DxDataGridModule } from 'devextreme-angular';
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ContainerFormComponent } from '../pages/container/container-form/container-form.component';
+import { ExistingContainerSelectComponent } from '../pages/container/existing-container-select/existing-container-select.component';
 import { FreigthFormComponent } from '../pages/freigth/freigth-form/freigth-form.component';
 import { DropdownAnchorDirective } from './directives/dropdown-anchor.directive';
 import { DropdownLinkDirective } from './directives/dropdown-link.directive';
@@ -31,6 +32,7 @@ const directives = [
 const components = [
   ContainerFormComponent,
   FreigthFormComponent,
+  ExistingContainerSelectComponent
 ];
 
 export const MY_FORMATS = {

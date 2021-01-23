@@ -1,9 +1,15 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { UserRole } from 'src/app/enums/user-role.enum';
-import { Container } from '../../../models/container/container';
+import { ActivatedRoute } from '@angular/router';
+import { UserRole } from '../../../enums/user-role.enum';
+import { ScheduleContainer } from '../../../models/schedule/schedule-container';
+import { Vessel } from '../../../models/vessel/vessel';
 import { AuthService } from '../../../services/auth.service';
+import { NotificationService } from '../../../services/notification.service';
+import { ScheduleService } from '../../../services/schedule.service';
 import { ContainerFormComponent } from '../../container/container-form/container-form.component';
+import { ExistingContainerSelectComponent } from '../../container/existing-container-select/existing-container-select.component';
 import { FreigthFormComponent } from '../../freigth/freigth-form/freigth-form.component';
 
 @Component({
@@ -12,25 +18,46 @@ import { FreigthFormComponent } from '../../freigth/freigth-form/freigth-form.co
   styleUrls: ['./schedule-add-container.component.css']
 })
 export class ScheduleAddContainerComponent implements OnInit {
-  vesselName = 'Paparipo';
+  currentScheduleId = 0;
   focusedRowKey = 0;
   isAdmin = false;
-  containers: Container[] = [
-    { containerId: 0, containerType: 'Un tipo', containerPayload: 1, containerCapacity: 2, containerLenth: 3, containerWidth: 4, containerHeigth: 5 },
-    { containerId: 1, containerType: 'Otro tipo', containerPayload: 2, containerCapacity: 3, containerLenth: 4, containerWidth: 5, containerHeigth: 6 }
-  ];
-  groupPanelTexts = {
-    groupByThisColumn: 'Agrupar por esta columna',
-    groupContinuedMessage: 'Continuación desde la página anterior',
-    groupContinuesMessage: 'Continúa en la siguiente página'
-  };
+  isLoading: boolean;
+  freigthIsLoading: boolean;
+  vessel: Vessel;
+  scheduleContainers: ScheduleContainer[] = [];
+  selectContainerDialogResponse: { containersId: number[], addContainerFeigth: boolean, createNewContainer: boolean };
 
   constructor(private dialog: MatDialog,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute,
+    private scheduleService: ScheduleService,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
+    this.isLoading = true;
+    this.currentScheduleId = +this.activatedRoute.snapshot.params['id'];
     const currentUser = this.authService.getCurrentUser();
-    this.isAdmin = currentUser.userRole === UserRole.Admin;
+    this.isAdmin = currentUser.userRole === UserRole.Admin || currentUser.userRole === UserRole.Master;
+    this.getVessel();
+  }
+
+  getVessel() {
+    this.scheduleService.GetScheduleVessel(this.currentScheduleId).then((response: Vessel) => {
+      this.vessel = response;
+      this.getScheduleVesselContainers();
+    }).catch((error: HttpErrorResponse) => {
+      this.notificationService.showErrorMessage(error.error);
+    });
+  }
+
+  getScheduleVesselContainers() {
+    this.scheduleService.GetScheduleVesselContainers(this.currentScheduleId).then((response: ScheduleContainer[]) => {
+      this.scheduleContainers = response;
+      this.focusedRowKey = response.length > 0 ? response[response.length - 1].id : 0;
+      this.isLoading = false
+    }).catch((error: HttpErrorResponse) => {
+      this.notificationService.showErrorMessage(error.error);
+    });
   }
 
   onFocusedRowChanging(e) {
@@ -52,35 +79,73 @@ export class ScheduleAddContainerComponent implements OnInit {
     }
   }
 
-  onFocusedRowChanged(e) {
-    const rowData = e.row && e.row.data;
+  openSelectContainerDialog() {
+    const dialogRef = this.dialog.open(ExistingContainerSelectComponent, {
+      width: '50%'
+    });
 
-    if (rowData) {
-      // TO DO
-    }
+    dialogRef.afterClosed().subscribe((result: { containersId: number[], createNewContainer: boolean }) => {
+      if (result && result.createNewContainer) {
+        this.openNewContainerDialog();
+      } else if (result && !result.createNewContainer) {
+        const request = {
+          scheduleId: this.currentScheduleId,
+          containersId: result.containersId
+        }
+
+        this.scheduleService.AddMultipleContainersToScheduleVessel(request).then(() => {
+          this.isLoading = true;
+          this.getScheduleVesselContainers();
+        }).catch((error: HttpErrorResponse) => {
+          this.notificationService.showErrorMessage(error.error);
+        });
+      }
+    });
   }
 
-  onExport() {
-    // TO DO
-  }
-
-  openContainerDialog(): void {
+  openNewContainerDialog() {
     const dialogRef = this.dialog.open(ContainerFormComponent, {
       width: '50%'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result: number) => {
+      if (result) {
+        this.addNewContainerToScheduleVessel(result);
+      }
     });
   }
 
-  openFreigthDialog(): void {
+  addNewContainerToScheduleVessel(containerId: number) {
+    this.isLoading = true;
+    this.scheduleService.AddContainerToScheduleVessel(this.currentScheduleId, containerId).then(() => {
+      this.getScheduleVesselContainers();
+    }).catch((error: HttpErrorResponse) => {
+      this.notificationService.showErrorMessage(error.error);
+    });
+  }
+
+  openFreigthDialog() {
     const dialogRef = this.dialog.open(FreigthFormComponent, {
       width: '50%'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result: number) => {
+      if (result) {
+        this.freigthIsLoading = true;
+        const request = {
+          scheduleVesselContainerId: this.focusedRowKey,
+          freigthId: result
+        };
+        this.focusedRowKey = 0;
+
+        this.scheduleService.AddFreigthToScheduleVesselContainer(request).then(() => {
+          this.focusedRowKey = request.scheduleVesselContainerId;
+          this.freigthIsLoading = false;
+        }).catch((error: HttpErrorResponse) => {
+          this.freigthIsLoading = false;
+          this.notificationService.showErrorMessage(error.error);
+        });
+      }
     });
   }
 }

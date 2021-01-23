@@ -16,7 +16,8 @@ export function createAbilityFor(role: UserRole): RawRule[] {
     product: 'Productos',
     user: 'Usuarios',
     vessel: 'Buques',
-    dashboard: 'Dashboards'
+    dashboard: 'Dashboards',
+    schedule: 'Agenda de buques'
   };
 
   const routes = {
@@ -28,7 +29,8 @@ export function createAbilityFor(role: UserRole): RawRule[] {
     product: 'product',
     user: 'user',
     vessel: 'vessel',
-    dashboard: 'dashboard'
+    dashboard: 'dashboard',
+    schedule: 'schedule'
   };
 
   const { can, rules } = AbilityBuilder.extract();

@@ -1,8 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { FreigthEvaluationStatus } from '../../../enums/freigth-evaluation-status';
 import { UserRole } from '../../../enums/user-role.enum';
-import { Freigth } from '../../../models/freigth/freigth';
+import { ScheduleContainerFreigth } from '../../../models/schedule/schedule-container-freigth';
 import { AuthService } from '../../../services/auth.service';
+import { NotificationService } from '../../../services/notification.service';
+import { ScheduleService } from '../../../services/schedule.service';
 
 @Component({
   selector: 'app-achedule-add-freigth',
@@ -12,49 +16,106 @@ import { AuthService } from '../../../services/auth.service';
 export class AcheduleAddFreigthComponent implements OnInit, OnChanges {
   @Input() containerId: number;
   isAdmin = false;
-  freigths: Freigth[] = [
-    { freigthId: 0, freigthCode: '123', freigthDescription: 'Carga 0', freigthType: 'Tipo 1', freigthWeigth: 5.00, containerId: 0, isActive: true },
-    { freigthId: 1, freigthCode: '321', freigthDescription: 'Carga 1', freigthType: 'Tipo 2', freigthWeigth: 15.00, containerId: 1, isActive: true },
-    { freigthId: 2, freigthCode: '213', freigthDescription: 'Carga 2', freigthType: 'Tipo 3', freigthWeigth: 10.00, containerId: 1, isActive: true },
-    { freigthId: 3, freigthCode: '132', freigthDescription: 'Carga 3', freigthType: 'Tipo 4', freigthWeigth: 20.00, containerId: 0, isActive: true }
-  ];
-  displayFreigths: Freigth[] = [];
+  isUser = false;
+  scheduleContainerFreigths: ScheduleContainerFreigth[] = [];
   currentFreigth: number;
   evaluationStatuses = FreigthEvaluationStatus;
   isLoading = true;
-  approbed = true;
-  problematic = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private scheduleService: ScheduleService,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     const currentUser = this.authService.getCurrentUser();
-    this.isAdmin = currentUser.userRole === UserRole.Admin;
+    this.isAdmin = currentUser.userRole === UserRole.Admin || currentUser.userRole === UserRole.Master;
+    this.isUser = currentUser.userRole === UserRole.User;
   }
 
   ngOnChanges() {
     this.isLoading = true;
     if (!isNaN(this.containerId)) {
       this.currentFreigth = null;
-      this.displayFreigths = this.freigths.filter(freigth => freigth.containerId === this.containerId);
-      this.isLoading = false;
+      this.getScheduleContainerFreigths();
     }
+  }
+
+  getScheduleContainerFreigths() {
+    this.scheduleService.GetScheduleContainerFreigths(this.containerId).then((response: ScheduleContainerFreigth[]) => {
+      this.scheduleContainerFreigths = response;
+      this.isLoading = false;
+    }).catch((error: HttpErrorResponse) => {
+      this.isLoading = false;
+      this.notificationService.showErrorMessage(error.error);
+    });
   }
 
   handlePanelExpansionToggle(freigthId: number) {
     this.currentFreigth = freigthId;
   }
 
-  evaluationStatus(freigthId: number) {
-    switch(freigthId) {
-      case 0:
-        return FreigthEvaluationStatus.Approved;
-      case 1:
-        return FreigthEvaluationStatus.Reported;
-      case 2:
-        return FreigthEvaluationStatus.Approved;
-      default:
-        return FreigthEvaluationStatus.None;
-    }
+  approveFreigth(scheduleContainerFreigthId: number) {
+    Swal.fire({
+      title: '¿Seguro que desea aprobar esta carga?',
+      text: "Estos cambios no podrán ser reversados...",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#218838',
+      confirmButtonText: 'Aprobar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.notificationService.showLoading();
+        this.scheduleService.ApproveScheduleContainerFreigth(scheduleContainerFreigthId).then(() => {
+          this.updateScheduleContainerFreigthEvaluationStatus(scheduleContainerFreigthId, FreigthEvaluationStatus.Approved);
+          this.notificationService.showSuccessMessage('La carga ha sido aprobada con éxito.');
+        }).catch((error: HttpErrorResponse) => {
+          this.notificationService.showErrorMessage(error.error);
+        });
+      }
+    });
+  }
+
+  async reportFreigth(scheduleContainerFreigthId: number) {
+    await Swal.fire({
+      title: '¿Seguro que desea reportar esta carga?',
+      text: "Estos cambios no pueden ser reversados",
+      input: 'textarea',
+      inputPlaceholder: 'Escriba porqué está reportando esta carga...',
+      showCancelButton: true,
+      confirmButtonColor: '#c82333',
+      confirmButtonText: 'Reportar',
+      cancelButtonText: 'Cancelar',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Es requerido que especifique la razón por la cual desea reportar esta carga.';
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (result.value) {
+          this.notificationService.showLoading();
+          const request: { scheduleContainerFreigthId: number, message: string } = {
+            scheduleContainerFreigthId: scheduleContainerFreigthId,
+            message: result.value
+          };
+
+          this.scheduleService.ReportScheduleContainerFreigth(request).then(() => {
+            this.updateScheduleContainerFreigthEvaluationStatus(scheduleContainerFreigthId, FreigthEvaluationStatus.Reported);
+            this.notificationService.showSuccessMessage('La carga ha sido reportada con éxito.');
+          }).catch((error: HttpErrorResponse) => {
+            this.notificationService.showErrorMessage(error.error);
+          });
+        }
+      }
+    });
+  }
+
+  updateScheduleContainerFreigthEvaluationStatus(scheduleContainerFreigthId: number, status: FreigthEvaluationStatus) {
+    this.scheduleContainerFreigths.forEach(containerFreigth => {
+      if (containerFreigth.id === scheduleContainerFreigthId) {
+        containerFreigth.evaluationStatus = status;
+      }
+    });
   }
 }

@@ -1,8 +1,8 @@
-﻿using PopApp.Core.Entities;
+﻿using PopAppCore.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PopApp.Core.Interfaces.Services
+namespace PopAppCore.Interfaces.Services
 {
     public interface ICompanyServices
     {

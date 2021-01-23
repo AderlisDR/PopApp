@@ -20,7 +20,7 @@ constructor(private http: HttpClient , @Inject('BASE_URL') private baseUrl: stri
   }
 
   PostFreigth(freigth: Freigth){
-    return this.http.post(`${this.baseUrl}api/freigths` , freigth).toPromise();
+    return this.http.post<number>(`${this.baseUrl}api/freigths` , freigth).toPromise();
   }
 
   PutFreigth(freigth: Freigth , id: number){

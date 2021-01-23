@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PopApp.Core.Entities;
 using PopAppCore.Entities;
 
 namespace PopApp.Structure.Data
@@ -18,5 +17,8 @@ namespace PopApp.Structure.Data
         public virtual DbSet<Logger> Loggers { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<ContainerTypeModel> containerType { get; set; }
+        public virtual DbSet<ScheduleContainer> ScheduleContainers { get; set; }
+        public virtual DbSet<ScheduleContainerFreigth> ScheduleContainerFreigths { get; set; }
+        public virtual DbSet<ScheduleContainerFreigthProduct> ScheduleContainerFreigthProducts { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace PopApp.Core.Entities
+namespace PopAppCore.Entities
 {
     public class Vessel
     {
@@ -15,6 +15,5 @@ namespace PopApp.Core.Entities
         public string VesselArrival { get; set; }
         public bool IsActive { get; set; }
         public virtual IEnumerable<Document> Documents { get; set; }
-        public virtual IEnumerable<Container> Containers { get; set; }
     }
 }

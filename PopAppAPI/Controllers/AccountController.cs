@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
+using PopAppCore.Interfaces.Services;
 using PopAppData.Models.Account;
 using System;
 using System.IdentityModel.Tokens.Jwt;

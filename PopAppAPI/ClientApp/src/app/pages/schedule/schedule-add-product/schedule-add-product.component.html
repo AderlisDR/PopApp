@@ -2,9 +2,9 @@
   <div class="example-container" *ngIf="isAdmin">
     <h2>Productos aplican</h2>
     <mat-chip-list id="todo" class="example-chip" cdkDropList cdkDropListOrientation="horizontal"
-      [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)">
-      <mat-chip class="example-box" cdkDrag *ngFor="let item of todo">
-        {{item}}
+      [cdkDropListData]="availableProducts" (cdkDropListDropped)="drop($event)">
+      <mat-chip class="example-box" cdkDrag *ngFor="let item of availableProducts">
+        {{item.productName}}
       </mat-chip>
     </mat-chip-list>
   </div>
@@ -12,16 +12,11 @@
   <div class="example-container">
     <h2>Productos cargados</h2>
     <mat-chip-list id="done" class="example-chip border-ligth" cdkDropList cdkDropListOrientation="horizontal"
-      [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
-      <mat-chip class="example-box" *ngFor="let item of done" [removable]="removable" (removed)="remove(item)">
-        {{item}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      [cdkDropListData]="loadedProducts" (cdkDropListDropped)="drop($event)">
+      <mat-chip class="example-box" *ngFor="let item of loadedProducts" [removable]="isAdmin" (removed)="removeProduct(item)">
+        {{item.productName}}
+        <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
   </div>
 </div>
-<mat-action-row>
-  <button *ngIf="isAdmin" class="btn btn-sm btn-primary" type="button">Guardar</button>
-  <button *ngIf="isUser" class="btn btn-sm btn-danger" type="button" (click)="reporteFreigth()">Reportar</button>&nbsp;&nbsp;
-  <button *ngIf="isUser" class="btn btn-sm btn-success" type="button" (click)="approveFreigth()">Aprobar</button>
-</mat-action-row>

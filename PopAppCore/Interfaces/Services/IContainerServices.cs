@@ -1,14 +1,14 @@
-﻿using PopApp.Core.Entities;
+﻿using PopAppCore.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PopApp.Core.Interfaces.Services
+namespace PopAppCore.Interfaces.Services
 {
     public interface IContainerServices
     {
         Task<IEnumerable<Container>> GetContainers();
         Task<Container> GetContainer(int id);
-        Task CreateContainer(Container container);
+        Task<int> CreateContainer(Container container);
         Task UpdateContainer(int id, Container container);
         Task DeleteContainer(int id);
     }

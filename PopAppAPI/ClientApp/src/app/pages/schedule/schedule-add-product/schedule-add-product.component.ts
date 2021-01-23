@@ -1,99 +1,110 @@
 import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { UserRole } from '../../../enums/user-role.enum';
+import { Product } from '../../../models/product/product';
 import { AuthService } from '../../../services/auth.service';
-import Swal from 'sweetalert2'
+import { NotificationService } from '../../../services/notification.service';
+import { ProductService } from '../../../services/product.service';
+import { ScheduleService } from '../../../services/schedule.service';
 
 @Component({
   selector: 'app-schedule-add-product',
   templateUrl: './schedule-add-product.component.html',
   styleUrls: ['./schedule-add-product.component.scss']
 })
-export class ScheduleAddProductComponent implements OnInit {
+export class ScheduleAddProductComponent implements OnInit, OnChanges {
   @Input() freigthId: number;
-  removable = true;
+  isLoading = true;
   isAdmin = false;
   isUser = false;
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep',
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog',
-    'thing',
-    'thing1'
-  ];
-  done = [];
+  availableProducts: Product[] = [];
+  loadedProducts: Product[] = [];
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private scheduleService: ScheduleService,
+    private notificationService: NotificationService,
+    private productService: ProductService) { }
 
   ngOnInit() {
     const currentUser = this.authService.getCurrentUser();
-    this.isAdmin = currentUser.userRole === UserRole.Admin;
+    this.isAdmin = currentUser.userRole === UserRole.Admin || currentUser.userRole === UserRole.Master;
     this.isUser = currentUser.userRole === UserRole.User;
+    this.getProductLists();
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  ngOnChanges() {
+    if (this.freigthId) {
+      this.getProductLists();
+    }
+  }
+  
+  getProductLists() {
+    if (this.isAdmin) {
+      this.getAvailableProducts();
+    }
+
+    this.getLoadedProducts();
+  }
+
+  getAvailableProducts() {
+    this.productService.GetAvailableProductsByFreigthId(this.freigthId).then((response: Product[]) => {
+      this.availableProducts = response;
+      this.isLoading = false;
+    }).catch((error: HttpErrorResponse) => {
+      this.isLoading = false;
+      this.notificationService.showErrorMessage(error.error);
+    });
+  }
+
+  getLoadedProducts() {
+    this.scheduleService.GetScheduleContainerFreigthProducts(this.freigthId).then((response: Product[]) => {
+      this.loadedProducts = response;
+      this.isLoading = false;
+    }).catch((error: HttpErrorResponse) => {
+      this.isLoading = false;
+      this.notificationService.showErrorMessage(error.error);
+    });
+  }
+
+  drop(event: CdkDragDrop<Product[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      copyArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
+      if (!this.loadedProducts.some(product => product.productId === event.previousContainer.data[event.previousIndex].productId)) {
+        this.notificationService.showLoading();
 
-    if (!this.done.some(element => element === event.previousContainer.data[event.previousIndex])) {
-      this.done.push(event.container.data[event.currentIndex]);
+        const request: { scheduleVesselContainerFreigthId: number, productId: number } = {
+          scheduleVesselContainerFreigthId: this.freigthId,
+          productId: event.previousContainer.data[event.previousIndex].productId
+        };
+  
+        this.scheduleService.AddProductToScheduleVesselContainerFreigth(request).then(() => {
+          copyArrayItem(event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex);
+
+          this.notificationService.showSuccessMessage('Producto cargado con éxito.');
+        }).catch((error: HttpErrorResponse) => {
+          this.notificationService.showErrorMessage(error.error);
+        });
+      }
     }
   }
 
-  remove(item: string): void {
-    const index = this.done.indexOf(item);
+  removeProduct(product: Product): void {
+    const index = this.loadedProducts.indexOf(product);
 
     if (index >= 0) {
-      this.done.splice(index, 1);
-    }
-  }
+      this.notificationService.showLoading();
 
-  approveFreigth() {
-    Swal.fire({
-      title: '¿Seguro que desea aprobar esta carga?',
-      text: "Estos cambios no pueden ser reversados",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Aprobar',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // TO DO
-      }
-    });
-  }
-  
-  async reporteFreigth() {
-    /* const { value: text } = */ await Swal.fire({
-      title: '¿Seguro que desea reportar esta carga?',
-      text: "Estos cambios no pueden ser reversados",
-      input: 'textarea',
-      inputPlaceholder: 'Escriba porqué está reportando esta carga...',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Reportar',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        if (true) {
-          // TO DO
-        } else {
-          // TO DO
-        }
-      }
-    });
+      this.scheduleService.RemoveProductFromScheduleVesselContainerFreigth(this.freigthId, product.productId).then(() => {
+        this.loadedProducts.splice(index, 1);
+        this.notificationService.showSuccessMessage('Producto removido con éxito.');
+      }).catch((error: HttpErrorResponse) => {
+        this.notificationService.showErrorMessage(error.error);
+      });
+    }
   }
 }

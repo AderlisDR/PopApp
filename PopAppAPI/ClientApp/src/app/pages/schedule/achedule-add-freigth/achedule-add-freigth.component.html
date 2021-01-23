@@ -2,19 +2,31 @@
   <div class="col-12">
     <nz-skeleton [nzActive]="true" [nzLoading]="isLoading">
       <mat-accordion class="example-headers-align">
-        <mat-expansion-panel *ngFor="let freigth of displayFreigths" [expanded]="currentFreigth === freigth.freigthId"
-          (opened)="handlePanelExpansionToggle(freigth.freigthId)" hideToggle [disabled]="!freigth.isActive">
+        <mat-expansion-panel *ngFor="let scheduleContainerFreigth of scheduleContainerFreigths"
+          [expanded]="currentFreigth === scheduleContainerFreigth.freigth.freigthId"
+          (opened)="handlePanelExpansionToggle(scheduleContainerFreigth.freigth.freigthId)" hideToggle
+          [disabled]="!scheduleContainerFreigth.freigth.isActive">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Código carga: {{freigth.freigthCode}}
+              Código carga: {{scheduleContainerFreigth.freigth.freigthCode}}
             </mat-panel-title>
             <mat-panel-description>
-              {{freigth.freigthDescription}}
+              {{scheduleContainerFreigth.freigth.freigthDescription}}
             </mat-panel-description>
-            <mat-icon *ngIf="evaluationStatus(freigth.freigthId) === evaluationStatuses.Approved" class="text-success">check_circle</mat-icon>
-            <mat-icon *ngIf="evaluationStatus(freigth.freigthId) === evaluationStatuses.Reported" class="text-danger">highlight_off</mat-icon>
+            <span *ngIf="isUser">
+              <mat-icon
+                *ngIf="scheduleContainerFreigth.evaluationStatus === evaluationStatuses.Approved"
+                class="text-success">check_circle</mat-icon>
+              <mat-icon
+                *ngIf="scheduleContainerFreigth.evaluationStatus === evaluationStatuses.Reported"
+                class="text-danger">highlight_off</mat-icon>
+            </span>
           </mat-expansion-panel-header>
-          <app-schedule-add-product [freigthId]="freigth.freigthId"></app-schedule-add-product>
+          <app-schedule-add-product [freigthId]="scheduleContainerFreigth.id"></app-schedule-add-product>
+          <mat-action-row *ngIf="isUser && scheduleContainerFreigth.evaluationStatus === evaluationStatuses.None">
+            <button class="btn btn-sm btn-danger" type="button" (click)="reportFreigth(scheduleContainerFreigth.id)">Reportar</button>&nbsp;&nbsp;
+            <button class="btn btn-sm btn-success" type="button" (click)="approveFreigth(scheduleContainerFreigth.id)">Aprobar</button>
+          </mat-action-row>
         </mat-expansion-panel>
       </mat-accordion>
     </nz-skeleton>

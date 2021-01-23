@@ -1,10 +1,7 @@
-import { ContainerSchedule } from './container-schedule';
-
 export interface Schedule {
   scheduleId?: number;
   scheduleDate?: Date;
   vesselId?: number;
-  createdAt?: Date;
+  createAt?: Date;
   isActive?: boolean;
-  containerSchedule?: ContainerSchedule[];
 }

@@ -1,4 +1,4 @@
-﻿namespace PopApp.Core.Dtos
+﻿namespace PopAppCore.Dtos
 {
     public sealed class FreigthDto
     {

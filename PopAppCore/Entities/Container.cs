@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PopApp.Core.Entities
+namespace PopAppCore.Entities
 {
-    public class Container
+    public sealed class Container
     {
         [Key]
         public int ContainerId { get; set; }
@@ -20,9 +19,6 @@ namespace PopApp.Core.Entities
         [Column(TypeName = "decimal(4,2)")]
         public decimal? ContainerHeigth { get; set; }
         public bool IsActive { get; set; }
-        public int VesselId { get; set; }
-        public virtual Vessel Vessel { get; set; }
-        public virtual IEnumerable<Freigth> Freigths { get; set; }
 
     }
 }

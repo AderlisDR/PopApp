@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
 using PopApp.Structure.Data;
 using PopAppCore.Dtos;
+using PopAppCore.Entities;
+using PopAppCore.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +21,7 @@ namespace PopApp.Structure.Services
         }
         public async Task CreatetVessel(Vessel vessel)
         {
+            vessel.IsActive = true;
             _context.Add(vessel);
             await _context.SaveChangesAsync();
         }

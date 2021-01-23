@@ -17,10 +17,10 @@
         </div>
         <div class="form-group">
           <label for="date"><b><span class="text-danger">*</span>Fecha de llegada:</b></label>
-          <nz-date-picker id="date" formControlName="date" (ngModelChange)="handleDateChange($event)"
-            [nzDisabledDate]="disabledDate" nzPlaceHolder="Seleccione una fecha" nzSize="large"></nz-date-picker>
+          <nz-date-picker id="date" formControlName="date" [nzDisabledDate]="disabledDate"
+            nzPlaceHolder="Seleccione una fecha" nzSize="large"></nz-date-picker>
           <span *ngIf="scheduleVesselForm.get('date').touched && scheduleVesselForm.get('date').hasError('required')"
-            class="text-danger">La descripción es requerida.</span>
+            class="text-danger">La fechad de llegada es requerida.</span>
         </div>
         <button class="btn btn-primary" type="submit">Agendar</button>
       </div>

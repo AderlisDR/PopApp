@@ -33,6 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201214004015_RefactoredScheduleEntities.cs" />
+    <Compile Remove="Migrations\20201214004015_RefactoredScheduleEntities.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PopAppCore\PopAppCore.csproj" />
     <ProjectReference Include="..\PopAppData\PopAppData.csproj" />
   </ItemGroup>

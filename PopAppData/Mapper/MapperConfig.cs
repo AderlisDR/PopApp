@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using PopApp.Core.Dtos;
-using PopApp.Core.Entities;
 using PopAppCore.Dtos;
 using PopAppCore.Entities;
 

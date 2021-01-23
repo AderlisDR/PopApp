@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 import { Freigth } from '../../../models/freigth/freigth';
 import { FreigthService } from '../../../services/freigth.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-freigth-form',
@@ -14,7 +15,9 @@ export class FreigthFormComponent implements OnInit {
   freigthForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-    private freigthService: FreigthService) { }
+    private freigthService: FreigthService,
+    private notificationService: NotificationService,
+    public dialogRef: MatDialogRef<FreigthFormComponent>) { }
 
   ngOnInit() {
     this.formBuild();
@@ -25,43 +28,24 @@ export class FreigthFormComponent implements OnInit {
       freigthCode: ['', [Validators.required]],
       freigthDescription: ['', [Validators.required]],
       freigthType: ['', [Validators.required]],
-      freigthWeigth: [0, [Validators.required]]
+      freigthWeigth: ['', [Validators.required]]
     });
   }
 
   createFreigth() {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Save!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const freigth: Freigth = {
-          freigthCode: this.freigthForm.controls.freigthCode.value,
-          freigthDescription: this.freigthForm.controls.freigthDescription.value,
-          freigthType: this.freigthForm.controls.freigthType.value,
-          freigthWeigth: this.freigthForm.controls.freigthWeigth.value,
-        };
+    const freigth: Freigth = {
+      freigthCode: this.freigthForm.controls.freigthCode.value,
+      freigthDescription: this.freigthForm.controls.freigthDescription.value,
+      freigthType: this.freigthForm.controls.freigthType.value,
+      freigthWeigth: parseFloat(this.freigthForm.controls.freigthWeigth.value),
+    };
 
-        this.freigthService.PostFreigth(freigth).then(() => {
-          this.freigthForm.reset();
-          Swal.fire(
-            'Complete!',
-            'Your file has been Saved.',
-            'success'
-          );
-        }).catch((error: HttpErrorResponse) => {
-          Swal.fire(
-            'Error!',
-            error.error,
-            'error'
-          );
-        });
-      }
+    this.freigthService.PostFreigth(freigth).then((response: number) => {
+      this.notificationService.showSuccessMessage('Carga guardada con éxito');
+      this.freigthForm.reset();
+      this.dialogRef.close(response);
+    }).catch((error: HttpErrorResponse) => {
+      this.notificationService.showErrorMessage(error.error);
     });
   }
 }

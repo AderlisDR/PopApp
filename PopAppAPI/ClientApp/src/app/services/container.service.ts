@@ -18,7 +18,7 @@ export class ContainerService {
   }
 
   PostContainer(container: Container) {
-    return this.http.post(`${this.baseUrl}api/containers` , container).toPromise();
+    return this.http.post<number>(`${this.baseUrl}api/containers` , container).toPromise();
   }
 
   PutContainer(container: Container , id: number) {

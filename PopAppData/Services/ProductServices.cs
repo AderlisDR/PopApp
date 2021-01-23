@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
 using PopApp.Structure.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using PopAppCore.Interfaces.Services;
 
 namespace PopApp.Structure.Services
 {
@@ -18,6 +20,7 @@ namespace PopApp.Structure.Services
         }
         public async Task CreateProduct(Product product)
         {
+            product.IsActive = true;
             _context.Add(product);
             await _context.SaveChangesAsync();
         }
@@ -58,5 +61,8 @@ namespace PopApp.Structure.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IList<Product>> GetProductsByCondition(Expression<Func<Product, bool>> condition)
+            => await _context.Products.Where(condition).ToListAsync();
     }
 }
