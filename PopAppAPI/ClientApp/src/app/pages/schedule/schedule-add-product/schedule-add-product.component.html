@@ -1,0 +1,22 @@
+<div cdkDropListGroup>
+  <div class="example-container" *ngIf="isAdmin">
+    <h2>Productos aplican</h2>
+    <mat-chip-list id="todo" class="example-chip" cdkDropList cdkDropListOrientation="horizontal"
+      [cdkDropListData]="availableProducts" (cdkDropListDropped)="drop($event)">
+      <mat-chip class="example-box" cdkDrag *ngFor="let item of availableProducts">
+        {{item.productName}}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <div class="example-container">
+    <h2>Productos cargados</h2>
+    <mat-chip-list id="done" class="example-chip border-ligth" cdkDropList cdkDropListOrientation="horizontal"
+      [cdkDropListData]="loadedProducts" (cdkDropListDropped)="drop($event)">
+      <mat-chip class="example-box" *ngFor="let item of loadedProducts" [removable]="isAdmin" (removed)="removeProduct(item)">
+        {{item.productName}}
+        <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</div>

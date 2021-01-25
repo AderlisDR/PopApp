@@ -1,25 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
 using PopApp.Structure.Data;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using PopAppCore.Interfaces.Services;
 
 namespace PopApp.Structure.Services
 {
     public class ContainerServices : IContainerServices
     {
         private readonly PopAppContext _context;
+
         public ContainerServices(PopAppContext context)
-        {
-            _context = context;
-        }
-        public async Task CreateContainer(Container container)
+            => _context = context;
+
+        public async Task<int> CreateContainer(Container container)
         {
             _context.Add(container);
             await _context.SaveChangesAsync();
+
+            return container.ContainerId;
         }
 
         public async Task DeleteContainer(int id)

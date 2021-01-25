@@ -1,7 +1,7 @@
 ﻿using PopAppCore.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace PopApp.Core.Entities
+namespace PopAppCore.Entities
 {
     public sealed class User
     {

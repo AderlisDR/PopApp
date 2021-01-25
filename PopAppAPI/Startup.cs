@@ -8,9 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using PopApp.Core.Interfaces.Services;
 using PopApp.Structure.Data;
 using PopApp.Structure.Services;
+using PopAppCore.Interfaces.Services;
+using PopAppData.Services;
 using System;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,6 +115,7 @@ namespace PopAppAPI
             services.AddTransient<IVesselServices, VesselServices>();
             services.AddScoped<IAuthenticationServices, AuthenticationServices>();
             services.AddTransient<ILoggerServices, LoggerServices>();
+            services.AddTransient<IScheduleServices, ScheduleServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

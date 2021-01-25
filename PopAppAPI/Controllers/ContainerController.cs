@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PopApp.Core.Dtos;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PopAppCore.Dtos;
+using PopAppCore.Interfaces.Services;
 
 namespace PopAppMaster.Api.Controllers
 {
@@ -36,7 +36,7 @@ namespace PopAppMaster.Api.Controllers
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -51,7 +51,7 @@ namespace PopAppMaster.Api.Controllers
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -62,12 +62,13 @@ namespace PopAppMaster.Api.Controllers
             {
                 var container = _mapper.Map<Container>(containerDto);
                 container.IsActive = true;
-                await _repo.CreateContainer(container);
-                return Ok();
+                int newContainerId = await _repo.CreateContainer(container);
+
+                return Ok(newContainerId);
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -83,7 +84,7 @@ namespace PopAppMaster.Api.Controllers
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -98,7 +99,7 @@ namespace PopAppMaster.Api.Controllers
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return BadRequest(e.Message);
             }
         }
     }

@@ -1,8 +1,14 @@
-<h1 id="tableLabel">Tabla Compañia</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
-<p *ngIf="!vesselData"><em>Loading...</em></p>
+<div class="row mb-3">
+  <div class="col-md-9 col-sm-12">
+    <h1 id="tableLabel">Consulta de Buques</h1>
+  </div>
+  <div class="col-md-3 col-sm-12 d-flex justify-content-end">
+    <button *ngIf="isAdmin" class="btn btn-sm p-0 icon-size-lg" (click)="openDialog()">
+      <span nz-tooltip nzTooltipTitle="Agregar nuevo buque">
+        <i nz-icon nzType="plus-circle" nzTheme="twotone" [nzTwotoneColor]="'#52c41a'"></i>
+      </span></button>
+  </div>
+</div>
 
 <dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="vesselData"
   [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"

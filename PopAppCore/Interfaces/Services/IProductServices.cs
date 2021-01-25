@@ -1,8 +1,10 @@
-﻿using PopApp.Core.Entities;
+﻿using PopAppCore.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace PopApp.Core.Interfaces.Services
+namespace PopAppCore.Interfaces.Services
 {
     public interface IProductServices
     {
@@ -11,5 +13,6 @@ namespace PopApp.Core.Interfaces.Services
         Task CreateProduct(Product product);
         Task UpdateProduct(int id, Product product);
         Task DeleteProduct(int id);
+        Task<IList<Product>> GetProductsByCondition(Expression<Func<Product, bool>> condition);
     }
 }

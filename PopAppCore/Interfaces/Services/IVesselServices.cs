@@ -1,11 +1,11 @@
-﻿using PopApp.Core.Entities;
-using PopAppCore.Dtos;
+﻿using PopAppCore.Dtos;
+using PopAppCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace PopApp.Core.Interfaces.Services
+namespace PopAppCore.Interfaces.Services
 {
     public interface IVesselServices
     {

@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 import { Vessel } from '../../../models/vessel/vessel';
+import { NotificationService } from '../../../services/notification.service';
 import { VesselService } from '../../../services/vessel.service';
 
 @Component({
@@ -10,59 +12,46 @@ import { VesselService } from '../../../services/vessel.service';
   styleUrls: ['./vessel-form.component.css'],
 })
 export class VesselFormComponent implements OnInit {
-
   vesselForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder , private vesselService: VesselService) {}
+  constructor(private formBuilder: FormBuilder,
+    private vesselService: VesselService,
+    private notificationService: NotificationService,
+    public dialogRef: MatDialogRef<VesselFormComponent>) { }
 
   ngOnInit() {
     this.formBuild();
   }
 
-  private formBuild(){
-    this.vesselForm = this.formBuilder.group(
-      {
-        vesselName: new FormControl('', Validators.required),
-        vesselCode: new FormControl('', Validators.required),
-        vesselImo: new FormControl('', Validators.required),
-        vesselFlag: new FormControl('', Validators.required),
-        vesselSlora: new FormControl('', Validators.required),
-        vesselArrival: new FormControl('', Validators.required),
-      }
-    );
+  private formBuild() {
+    this.vesselForm = this.formBuilder.group({
+      vesselName: ['', [Validators.required]],
+      vesselCode: ['', [Validators.required]],
+      vesselImo: ['', [Validators.required]],
+      vesselFlag: ['', [Validators.required]],
+      vesselSlora: ['', [Validators.required]],
+      vesselArrival: ['', [Validators.required]],
+    });
   }
 
-   createVessel(){
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Save!'
-    }).then((result) => {
+  createVessel() {
+    let vessel: Vessel = {
+      vesselName: this.vesselForm.controls.vesselName.value,
+      vesselCode: this.vesselForm.controls.vesselCode.value,
+      vesselImo: this.vesselForm.controls.vesselImo.value,
+      vesselFlag: this.vesselForm.controls.vesselFlag.value,
+      vesselSlora: this.vesselForm.controls.vesselSlora.value,
+      vesselArrival: this.vesselForm.controls.vesselArrival.value,
+    }
 
-      let vessel: Vessel ={
-        vesselName: this.vesselForm.controls.vesselName.value,
-        vesselCode: this.vesselForm.controls.vesselCode.value,
-        vesselImo: this.vesselForm.controls.vesselImo.value,
-        vesselFlag: this.vesselForm.controls.vesselFlag.value,
-        vesselSlora: this.vesselForm.controls.vesselSlora.value,
-        vesselArrival: this.vesselForm.controls.vesselArrival.value,
-      }
-
-      this.vesselService.PostVessel(vessel).then(resp=>{}).catch(err=>{});
-
+    this.notificationService.showLoading();
+    this.vesselService.PostVessel(vessel).then(() => {
       this.vesselForm.reset();
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Complete!',
-          'Your file has been Saved.',
-          'success'
-        )
-      }
-    })
-   }
+      this.notificationService.showSuccessMessage('Contenedor registrado con éxito.');
+      this.dialogRef.close(true);
+    }).catch((error: HttpErrorResponse) => {
+      this.notificationService.showErrorMessage(error.error);
+    });
+  }
 
 }

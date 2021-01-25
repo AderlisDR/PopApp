@@ -1,34 +1,46 @@
 <div class="card">
-  <div class="card-header text-white text-center bg-primary">Vessel Form</div>
+  <h5 class="card-header">Nuevo buque</h5>
   <div class="card-body">
 
     <form [formGroup]="vesselForm" (ngSubmit)="createVessel()">
       <div class="form-group">
         <input nz-input placeholder="Nombre del buque" formControlName="vesselName" />
-        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselName.hasError('required')">El nombre es requerido</span>
+        <span class="text-danger" *ngIf="vesselForm.controls.vesselName.hasError('required') && vesselForm.controls.vesselName.dirty">
+          El nombre es requerido
+        </span>
       </div>
       <div class="form-group">
         <input nz-input placeholder="Codigo del buque" formControlName="vesselCode" />
-        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselCode.hasError('required')">El Codigo es requerido</span>
+        <span class="text-danger" *ngIf="vesselForm.controls.vesselCode.hasError('required') && vesselForm.controls.vesselCode.dirty">
+          El Codigo es requerido
+        </span>
       </div>
       <div class="form-group">
         <input nz-input placeholder="Imo del buque" formControlName="vesselImo" />
-        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselImo.hasError('required')">El Imo es requerido</span>
+        <span class="text-danger" *ngIf="vesselForm.controls.vesselImo.hasError('required') && vesselForm.controls.vesselImo.dirty">
+          El Imo es requerido
+        </span>
       </div>
       <div class="form-group">
         <input nz-input placeholder="Bandera del Buque" formControlName="vesselFlag" />
-        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselFlag.hasError('required')">La Bandera es requerido</span>
+        <span class="text-danger" *ngIf="vesselForm.controls.vesselFlag.hasError('required') && vesselForm.controls.vesselFlag.dirty">
+          La Bandera es requerido
+        </span>
       </div>
       <div class="form-group">
         <input nz-input placeholder="Slora del buque" formControlName="vesselSlora" />
-        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselSlora.hasError('required')">El Slora es requerido</span>
+        <span class="text-danger" *ngIf="vesselForm.controls.vesselSlora.hasError('required') && vesselForm.controls.vesselSlora.dirty">
+          El Slora es requerido
+        </span>
       </div>
       <div class="form-group">
         <input nz-input placeholder="Procedencia del buque" formControlName="vesselArrival" />
-        <span class="bg-danger text-white" *ngIf="vesselForm.controls.vesselArrival.hasError('required')">La Procedencia es requerido</span>
+        <span class="text-danger" *ngIf="vesselForm.controls.vesselArrival.hasError('required') && vesselForm.controls.vesselArrival.dirty">
+          La Procedencia es requerido
+        </span>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block" [disabled]="!vesselForm.valid">Send</button>
+        <button class="btn btn-primary btn-block" [disabled]="!vesselForm.valid">Guardar</button>
       </div>
     </form>
 

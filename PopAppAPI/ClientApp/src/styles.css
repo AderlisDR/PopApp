@@ -65,6 +65,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: inherit !important;
 }
 
+.icon-size-lg {
+  font-size: 40px !important;
+}
+
+.icon-size-md {
+  font-size: 25px !important;
+}
+
+nz-select {
+  width: 100%;
+}
+
+@media (max-width: 430px) {
+  nz-select {
+    width: 50%;
+  }
+}
+
 @-webkit-keyframes sk-bounce {
   0%,
   100% {
@@ -84,5 +102,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   50% {
     transform: scale(1);
     -webkit-transform: scale(1);
+  }
+}
+
+.example-chip.border-ligth.cdk-drop-list.mat-chip-list > div {
+  min-height: 30px !important;
+  border: 1px solid rgba(0,0,0,.125) !important;
+  border-radius: .25rem !important;
+}
+
+@media (min-width: 1435px) {
+  .example-chip.border-ligth.cdk-drop-list.mat-chip-list > div {
+    min-width: 1031px !important;
+  }
+}
+
+@media (min-width: 1020px) and (max-width:1430px) {
+  .example-chip.border-ligth.cdk-drop-list.mat-chip-list > div {
+    min-width: 685px !important;
+  }
+}
+
+@media (min-width: 430px) and (max-width: 800px) {
+  .example-chip.border-ligth.cdk-drop-list.mat-chip-list > div {
+    min-width: 419px !important;
   }
 }

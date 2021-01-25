@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PopApp.Core.Dtos
+namespace PopAppCore.Dtos
 {
     public sealed class ProductDto
     {

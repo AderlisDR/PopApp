@@ -55,6 +55,12 @@ export class NavigationService {
       type: 'link',
       icon: 'directions_boat',
       state: 'vessel'
+    },
+    {
+      name: 'Agenda de buques',
+      type: 'link',
+      icon: 'today',
+      state: 'schedule'
     }
   ];
   menuItems = new BehaviorSubject<IMenuItem[]>(this.iconMenu);

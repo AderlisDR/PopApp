@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
 using PopAppCore.Dtos;
+using PopAppCore.Entities;
+using PopAppCore.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

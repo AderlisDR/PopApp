@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
+using PopAppCore.Interfaces.Services;
 
 namespace PopAppAPI.Controllers
 {
@@ -88,6 +88,21 @@ namespace PopAppAPI.Controllers
             }catch(Exception e)
             {
                 return Ok(e.Message);
+            }
+        }
+
+        [HttpGet("available-for-freigth/{freigthId}")]
+        public async Task<IActionResult> GetAvailableProductsByFreigthId(int freigthId)
+        {
+            try
+            {
+                var products = await _repo.GetProductsByCondition(product => product.IsActive);
+
+                return Ok(products);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }

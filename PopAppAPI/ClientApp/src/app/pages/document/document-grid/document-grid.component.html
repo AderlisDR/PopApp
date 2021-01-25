@@ -1,8 +1,14 @@
-<h1 id="tableLabel">Tabla Documento</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
-<p *ngIf="!documentData"><em>Loading...</em></p>
+<div class="row mb-3">
+  <div class="col-md-9 col-sm-12">
+    <h1 id="tableLabel">Consulta de Documentos</h1>
+  </div>
+  <div class="col-md-3 col-sm-12 d-flex justify-content-end">
+    <button *ngIf="isAdmin" class="btn btn-sm p-0 icon-size-lg" (click)="openDialog()">
+      <span nz-tooltip nzTooltipTitle="Agregar nuevo documento de buque">
+        <i nz-icon nzType="plus-circle" nzTheme="twotone" [nzTwotoneColor]="'#52c41a'"></i>
+      </span></button>
+  </div>
+</div>
 
 <dx-data-grid id="gridContainer" [noDataText]="'No hay datos para mostrar'" [dataSource]="documentData"
   [allowColumnReordering]="true" [columnHidingEnabled]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="false"
@@ -36,24 +42,4 @@
 
   <dxi-column dataField="documentDescription" caption="Descripción" [hidingPriority]="0"></dxi-column>
 
-  <!-- <dxi-column caption="Acciones" cellTemplate="acciones" [allowExporting]="false"
-  [cssClass]="'text-center'" *ngIf="canManage"></dxi-column>
-<div *dxTemplate="let data of 'acciones'">
-  <div>
-    <button class="mb-2 btn-sm button-party-outline" [routerLink]="['../polling-table', data.data.enclosureId]"
-      *ngIf="canManage || isProvintial">
-      Detalles
-    </button>&nbsp;
-    <button class="mb-2 btn-sm button-party-outline" *ngIf="!data.data.hasCoordinator"
-      (click)="openCreateEnclosureCoordinatorModal(data.data.enclosureId)"
-      matTooltip="Asignar coordinador de recinto" matTooltipPosition="above">
-      &nbsp;<i class="fas fa-user-plus"></i>&nbsp;
-    </button>
-    <button class="btn button-party-outline btn-sm" *ngIf="data.data.hasCoordinator"
-      (click)="openCreateEnclosureCoordinatorModal(data.data.enclosureId, data.data.coordinatorIdentification)"
-      matTooltip="Ver detalles del coordinador de recinto" matTooltipPosition="above">
-      &nbsp;<i class="fas fa-eye"></i>&nbsp;
-    </button>
-  </div>
-</div> -->
 </dx-data-grid>

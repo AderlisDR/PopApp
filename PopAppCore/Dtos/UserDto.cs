@@ -1,6 +1,6 @@
 ﻿using PopAppCore.Enums;
 
-namespace PopApp.Core.Dtos
+namespace PopAppCore.Dtos
 {
     public sealed class UserDto
     {

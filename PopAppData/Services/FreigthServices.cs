@@ -1,25 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
 using PopApp.Structure.Data;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using PopAppCore.Interfaces.Services;
 
 namespace PopApp.Structure.Services
 {
     public class FreigthServices : IFreigthServices
     {
         private readonly PopAppContext _context;
+
         public FreigthServices(PopAppContext context)
         {
             _context = context;
         }
-        public async Task CreateFreigth(Freigth freigth)
+
+        public async Task<int> CreateFreigth(Freigth freigth)
         {
             _context.Add(freigth);
             await _context.SaveChangesAsync();
+
+            return freigth.FreigthId;
         }
 
         public async Task DeleteFreigth(int id)

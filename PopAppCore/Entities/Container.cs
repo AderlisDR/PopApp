@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace PopApp.Core.Entities
+namespace PopAppCore.Entities
 {
     public sealed class Container
     {
@@ -22,5 +19,6 @@ namespace PopApp.Core.Entities
         [Column(TypeName = "decimal(4,2)")]
         public decimal? ContainerHeigth { get; set; }
         public bool IsActive { get; set; }
+
     }
 }

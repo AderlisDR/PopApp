@@ -19,7 +19,7 @@ namespace PopAppAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PopApp.Core.Entities.Company", b =>
+            modelBuilder.Entity("PopAppCore.Entities.Company", b =>
                 {
                     b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace PopAppAPI.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("PopApp.Core.Entities.Container", b =>
+            modelBuilder.Entity("PopAppCore.Entities.Container", b =>
                 {
                     b.Property<int>("ContainerId")
                         .ValueGeneratedOnAdd()
@@ -79,7 +79,25 @@ namespace PopAppAPI.Migrations
                     b.ToTable("Containers");
                 });
 
-            modelBuilder.Entity("PopApp.Core.Entities.Document", b =>
+            modelBuilder.Entity("PopAppCore.Entities.ContainerTypeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContainerType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("containerType");
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.Document", b =>
                 {
                     b.Property<int>("DocumentId")
                         .ValueGeneratedOnAdd()
@@ -111,7 +129,7 @@ namespace PopAppAPI.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("PopApp.Core.Entities.Freigth", b =>
+            modelBuilder.Entity("PopAppCore.Entities.Freigth", b =>
                 {
                     b.Property<int>("FreigthId")
                         .ValueGeneratedOnAdd()
@@ -138,7 +156,7 @@ namespace PopAppAPI.Migrations
                     b.ToTable("Freigths");
                 });
 
-            modelBuilder.Entity("PopApp.Core.Entities.Logger", b =>
+            modelBuilder.Entity("PopAppCore.Entities.Logger", b =>
                 {
                     b.Property<int>("LoggerId")
                         .ValueGeneratedOnAdd()
@@ -162,7 +180,7 @@ namespace PopAppAPI.Migrations
                     b.ToTable("Loggers");
                 });
 
-            modelBuilder.Entity("PopApp.Core.Entities.Product", b =>
+            modelBuilder.Entity("PopAppCore.Entities.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -186,7 +204,105 @@ namespace PopAppAPI.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("PopApp.Core.Entities.User", b =>
+            modelBuilder.Entity("PopAppCore.Entities.Schedule", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ScheduleDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VesselId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ScheduleId");
+
+                    b.HasIndex("VesselId");
+
+                    b.ToTable("Schedules");
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.ScheduleContainer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContainerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContainerId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("ScheduleContainers");
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.ScheduleContainerFreigth", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EvaluationMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EvaluationStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FreigthId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ScheduleContainerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FreigthId");
+
+                    b.HasIndex("ScheduleContainerId");
+
+                    b.ToTable("ScheduleContainerFreigths");
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.ScheduleContainerFreigthProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ScheduleContainerFreigthId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ScheduleContainerFreigthId");
+
+                    b.ToTable("ScheduleContainerFreigthProducts");
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -216,7 +332,7 @@ namespace PopAppAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PopApp.Core.Entities.Vessel", b =>
+            modelBuilder.Entity("PopAppCore.Entities.Vessel", b =>
                 {
                     b.Property<int>("VesselId")
                         .ValueGeneratedOnAdd()
@@ -249,11 +365,65 @@ namespace PopAppAPI.Migrations
                     b.ToTable("Vessels");
                 });
 
-            modelBuilder.Entity("PopApp.Core.Entities.Document", b =>
+            modelBuilder.Entity("PopAppCore.Entities.Document", b =>
                 {
-                    b.HasOne("PopApp.Core.Entities.Vessel", null)
+                    b.HasOne("PopAppCore.Entities.Vessel", null)
                         .WithMany("Documents")
                         .HasForeignKey("VesselId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.Schedule", b =>
+                {
+                    b.HasOne("PopAppCore.Entities.Vessel", "Vessel")
+                        .WithMany()
+                        .HasForeignKey("VesselId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.ScheduleContainer", b =>
+                {
+                    b.HasOne("PopAppCore.Entities.Container", "Container")
+                        .WithMany()
+                        .HasForeignKey("ContainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PopAppCore.Entities.Schedule", "Schedule")
+                        .WithMany()
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.ScheduleContainerFreigth", b =>
+                {
+                    b.HasOne("PopAppCore.Entities.Freigth", "Freigth")
+                        .WithMany()
+                        .HasForeignKey("FreigthId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PopAppCore.Entities.ScheduleContainer", "ScheduleContainer")
+                        .WithMany()
+                        .HasForeignKey("ScheduleContainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PopAppCore.Entities.ScheduleContainerFreigthProduct", b =>
+                {
+                    b.HasOne("PopAppCore.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PopAppCore.Entities.ScheduleContainerFreigth", "ScheduleContainerFreigth")
+                        .WithMany()
+                        .HasForeignKey("ScheduleContainerFreigthId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

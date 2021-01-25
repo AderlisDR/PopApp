@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PopApp.Core.Dtos;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
+using PopAppCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PopAppCore.Dtos;
+using PopAppCore.Interfaces.Services;
 
 namespace PopAppMaster.Api.Controllers
 {

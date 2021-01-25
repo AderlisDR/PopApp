@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PopApp.Core.Entities;
-using PopApp.Core.Interfaces.Services;
 using PopApp.Structure.Data;
+using PopAppCore.Entities;
+using PopAppCore.Interfaces.Services;
 using System.Threading.Tasks;
 
 namespace PopApp.Structure.Services

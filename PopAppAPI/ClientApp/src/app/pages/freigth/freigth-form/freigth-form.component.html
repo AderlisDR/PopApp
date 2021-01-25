@@ -1,26 +1,33 @@
 <div class="card">
-  <div class="card-header text-white text-center bg-primary">Freigth Form</div>
+  <h5 class="card-header">Registrar Carga</h5>
   <div class="card-body">
-
     <form [formGroup]="freigthForm" (ngSubmit)="createFreigth()">
       <div class="form-group">
-        <input nz-input placeholder="Nombre de la Carga" formControlName="freigthCode" />
-        <span class="bg-danger text-white" *ngIf="freigthForm.controls.freigthCode.hasError('required')">El Code es requerido</span>
+        <input nz-input placeholder="Código" formControlName="freigthCode" />
+        <span class="text-danger" *ngIf="freigthForm.controls.freigthCode.hasError('required') && freigthForm.controls.freigthCode.touched">
+          El nombre es requerido
+        </span>
       </div>
       <div class="form-group">
-        <input nz-input placeholder="Tipo de la Carga" formControlName="freigthType" />
-        <span class="bg-danger text-white" *ngIf="freigthForm.controls.freigthType.hasError('required')">El Tipo es requerido</span>
+        <input nz-input placeholder="Tipo" formControlName="freigthType" />
+        <span class="text-danger" *ngIf="freigthForm.controls.freigthType.hasError('required') && freigthForm.controls.freigthType.touched">
+          El tipo es requerido
+        </span>
       </div>
       <div class="form-group">
-        <input nz-input placeholder="Nombre de la Carga" formControlName="freigthWeigth" />
-        <span class="bg-danger text-white" *ngIf="freigthForm.controls.freigthWeigth.hasError('required')">El Peso es requerido</span>
+        <input nz-input placeholder="Peso" formControlName="freigthWeigth" />
+        <span class="text-danger" *ngIf="freigthForm.controls.freigthWeigth.hasError('required') && freigthForm.controls.freigthWeigth.touched">
+          El peso es requerido
+        </span>
       </div>
       <div class="form-group">
-        <textarea nz-input placeholder="Descripcion de la Carga" formControlName="freigthDescription" nzAutosize></textarea>
-        <span class="bg-danger text-white" *ngIf="freigthForm.controls.freigthDescription.hasError('required')">El Peso es requerido</span>
+        <textarea nz-input placeholder="Descripción" formControlName="freigthDescription" nzAutosize></textarea>
+        <span class="text-danger" *ngIf="freigthForm.controls.freigthDescription.hasError('required') && freigthForm.controls.freigthDescription.touched">
+          La descripción es requerida
+        </span>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block" [disabled]="!freigthForm.valid">send</button>
+        <button class="btn btn-primary" [disabled]="!freigthForm.valid">Guardar</button>
       </div>
     </form>
   </div>

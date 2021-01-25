@@ -1,13 +1,9 @@
-﻿using PopAppCore.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace PopAppCore.Entities
 {
-    public sealed class Schedule
+    public class Schedule
     {
         [Key]
         public int ScheduleId { get; set; }
@@ -15,6 +11,6 @@ namespace PopAppCore.Entities
         public int VesselId { get; set; }
         public DateTime CreateAt { get; set; }
         public bool IsActive { get; set; }
-        public virtual IEnumerable<ContainerScheduleDto> ContainerSchedule { get; set; }
+        public virtual Vessel Vessel { get; set; }
     }
 }

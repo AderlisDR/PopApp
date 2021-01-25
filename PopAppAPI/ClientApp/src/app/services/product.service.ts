@@ -29,4 +29,8 @@ export class ProductService {
     return this.http.delete(`${this.baseUrl}api/products/${id}`).toPromise();
   }
 
+  GetAvailableProductsByFreigthId(freigthId: number) {
+    return this.http.get<Product[]>(`${this.baseUrl}api/products/available-for-freigth/${freigthId}`).toPromise();
+  }
+
 }

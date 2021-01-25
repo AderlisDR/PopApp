@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
+import { UserRole } from '../../../enums/user-role.enum';
 import { Document } from '../../../models/document/document';
 import { ImageDimensions } from '../../../models/document/image-dimentions';
+import { AuthService } from '../../../services/auth.service';
 import { DocumentService } from '../../../services/document.service';
 import { getImageDimensionsFromBase64 } from '../../../services/functions/get-image-dimentions-from-base64.function';
+import { DocumentsUploadComponent } from '../documents-upload/documents-upload.component';
 
 @Component({
   selector: 'app-document-grid',
@@ -11,7 +15,7 @@ import { getImageDimensionsFromBase64 } from '../../../services/functions/get-im
   styleUrls: ['./document-grid.component.scss']
 })
 export class DocumentGridComponent implements OnInit {
-
+  isAdmin = false;
   documentData: Document[];
   groupPanelTexts = {
     groupByThisColumn: 'Agrupar por esta columna',
@@ -19,9 +23,13 @@ export class DocumentGridComponent implements OnInit {
     groupContinuesMessage: 'Continúa en la siguiente página'
   };
 
-  constructor(private documentServices: DocumentService) { }
+  constructor(private documentServices: DocumentService,
+    private dialog: MatDialog,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    const currentUser = this.authService.getCurrentUser();
+    this.isAdmin = currentUser.userRole === UserRole.Admin || currentUser.userRole === UserRole.Master;
     this.onGetDocuments();
   }
 
@@ -48,4 +56,13 @@ export class DocumentGridComponent implements OnInit {
     });
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DocumentsUploadComponent, {
+      width: '50%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

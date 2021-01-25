@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 import { Product } from '../../../models/product/product';
+import { NotificationService } from '../../../services/notification.service';
 import { ProductService } from '../../../services/product.service';
 
 @Component({
@@ -10,55 +12,40 @@ import { ProductService } from '../../../services/product.service';
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent implements OnInit {
-
   productForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder , private productService: ProductService) { }
+  constructor(private formBuilder: FormBuilder,
+    private productService: ProductService,
+    public dialogRef: MatDialogRef<ProductFormComponent>,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.formBuild();
   }
 
-  private formBuild(){
-    this.productForm = this.formBuilder.group(
-      {
-        productName: new FormControl('' , Validators.required),
-        productDescription: new FormControl('' , Validators.required),
-        productCategory: new FormControl('' , Validators.required),
-      }
+  private formBuild() {
+    this.productForm = this.formBuilder.group({
+      productName: ['', [Validators.required]],
+      productDescription: ['', [Validators.required]],
+      productCategory: ['', [Validators.required]],
+    }
     );
   }
 
-  createProduct(){
+  createProduct() {
+    let product: Product = {
+      productName: this.productForm.controls.productName.value,
+      productCategory: this.productForm.controls.productCategory.value,
+      productDescription: this.productForm.controls.productDescription.value
+    }
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Save!'
-    }).then((result) => {
+    this.productService.PostProduct(product).then(() => {
+      this.notificationService.showSuccessMessage('Producto registrado con éxito.');
       this.productForm.reset();
-      if (result.isConfirmed) {
-
-        let product: Product = {
-           productName: this.productForm.controls.productName.value,
-           productCategory: this.productForm.controls.productCategory.value,
-           productDescription: this.productForm.controls.productDescription.value
-        }
-
-        this.productService.PostProduct(product).then(resp =>{}).catch(err =>{});
-
-        Swal.fire(
-          'Complete!',
-          'Your file has been Saved.',
-          'success'
-        )
-      }
-    })
-
+      this.dialogRef.close(true);
+    }).catch((error: HttpErrorResponse) => {
+      this.notificationService.showErrorMessage(error.error);
+    });
   }
 
 }
