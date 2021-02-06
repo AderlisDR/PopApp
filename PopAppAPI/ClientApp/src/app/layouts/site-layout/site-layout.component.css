@@ -1,5 +1,5 @@
-main > .container {
-    padding: 75px 15px 0;
+main > .container-main {
+  padding: 75px 15px 0;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {

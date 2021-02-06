@@ -1,0 +1,53 @@
+.header-style {
+  border-bottom: 1px solid rgb(244, 244, 244);
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.card-body h3 {
+  font-size: 38px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  white-space: nowrap;
+  padding: 0;
+  color: #fff;
+}
+
+.card-body p {
+  font-size: 15px;
+}
+
+.card-icon {
+  position: absolute;
+  top: 15px;
+  right: 100px;
+  z-index: 0;
+  color: rgba(0,0,0,0.15);
+}
+
+.big-icon {
+  transition: all .3s linear;
+  font-size: 90px;
+}
+
+.card:hover .big-icon {
+  font-size: 100px;
+}
+
+.card-footer-link {
+  position: relative;
+  text-align: center;
+  padding: 3px 0;
+  color: rgba(255,255,255,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  background: rgba(0,0,0,0.1);
+  text-decoration: none;
+}
+
+.card-footer-link:hover {
+  color: #fff;
+  background: rgba(0,0,0,0.15);
+}

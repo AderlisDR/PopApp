@@ -1,0 +1,74 @@
+<nz-skeleton [nzActive]="true" [nzLoading]="isLoading">
+  <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+    <mat-expansion-panel-header class="header-style">
+      <mat-panel-title class="dashboard-section-title">
+        <mat-icon>equalizer</mat-icon>
+        Estadísticas comunes
+      </mat-panel-title>
+      <mat-icon *ngIf="!panelOpenState">add</mat-icon>
+      <mat-icon *ngIf="panelOpenState">remove</mat-icon>
+    </mat-expansion-panel-header>
+    <div class="row pt-3">
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-white bg-info mb-3">
+          <div class="card-body">
+            <h3>{{testNumber}}</h3>
+            <p>Buques agendados</p>
+          </div>
+          <div class="card-icon">
+            <mat-icon class="big-icon">directions_boat</mat-icon>
+          </div>
+          <a class="card-footer-link" href="#">
+            Más información
+            <mat-icon>forward</mat-icon>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-white bg-warning mb-3">
+          <div class="card-body">
+            <h3>{{testNumber}}</h3>
+            <p>Carga sin evaluar</p>
+          </div>
+          <div class="card-icon">
+            <mat-icon class="big-icon">backpack</mat-icon>
+          </div>
+          <a class="card-footer-link" href="#">
+            Más información
+            <mat-icon>forward</mat-icon>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-body">
+            <h3>{{testNumber}}</h3>
+            <p>Carga aprobada</p>
+          </div>
+          <div class="card-icon">
+            <mat-icon class="big-icon">check_circle</mat-icon>
+          </div>
+          <a class="card-footer-link" href="#">
+            Más información
+            <mat-icon>forward</mat-icon>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-white bg-danger mb-3">
+          <div class="card-body">
+            <h3>{{testNumber}}</h3>
+            <p>Carga rechazada</p>
+          </div>
+          <div class="card-icon">
+            <mat-icon class="big-icon">highlight_off</mat-icon>
+          </div>
+          <a class="card-footer-link" href="#">
+            Más información
+            <mat-icon>forward</mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</nz-skeleton>

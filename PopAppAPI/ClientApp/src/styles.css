@@ -73,6 +73,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 25px !important;
 }
 
+.dashboard-section-title {
+  font-size: 19px !important;
+  font-weight: bold !important;
+}
+
 nz-select {
   width: 100%;
 }
