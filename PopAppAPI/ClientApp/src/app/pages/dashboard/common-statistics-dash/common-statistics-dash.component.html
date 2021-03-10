@@ -8,11 +8,11 @@
       <mat-icon *ngIf="!panelOpenState">add</mat-icon>
       <mat-icon *ngIf="panelOpenState">remove</mat-icon>
     </mat-expansion-panel-header>
-    <div class="row pt-3">
+    <div class="row pt-3" *ngIf="statistics">
       <div class="col-md-3 col-sm-6">
         <div class="card text-white bg-info mb-3">
           <div class="card-body">
-            <h3>{{testNumber}}</h3>
+            <h3>{{statistics.scheduledVesselsCount}}</h3>
             <p>Buques agendados</p>
           </div>
           <div class="card-icon">
@@ -27,7 +27,7 @@
       <div class="col-md-3 col-sm-6">
         <div class="card text-white bg-warning mb-3">
           <div class="card-body">
-            <h3>{{testNumber}}</h3>
+            <h3>{{statistics.noEvaluatedFreigthCount}}</h3>
             <p>Carga sin evaluar</p>
           </div>
           <div class="card-icon">
@@ -42,7 +42,7 @@
       <div class="col-md-3 col-sm-6">
         <div class="card text-white bg-success mb-3">
           <div class="card-body">
-            <h3>{{testNumber}}</h3>
+            <h3>{{statistics.approvedFreigthCount}}</h3>
             <p>Carga aprobada</p>
           </div>
           <div class="card-icon">
@@ -57,7 +57,7 @@
       <div class="col-md-3 col-sm-6">
         <div class="card text-white bg-danger mb-3">
           <div class="card-body">
-            <h3>{{testNumber}}</h3>
+            <h3>{{statistics.rejectedFreigthCount}}</h3>
             <p>Carga rechazada</p>
           </div>
           <div class="card-icon">

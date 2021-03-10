@@ -15,7 +15,7 @@ namespace PopAppData.Services
 
         public ContainerTypeServices(PopAppContext context) => _popAppContext = context;
 
-        public async Task CreateContainerType(ContainerTypeModel type)
+        public async Task CreateContainerType(FreigthType type)
         {
              _popAppContext.Add(type);
             await _popAppContext.SaveChangesAsync();
@@ -32,17 +32,17 @@ namespace PopAppData.Services
             }
         }
 
-        public Task<ContainerTypeModel> GetContainerType(int id)
+        public Task<FreigthType> GetContainerType(int id)
         {
-            return _popAppContext.containerType.FirstOrDefaultAsync(type => type.Id == id);
+            return _popAppContext.FreigthType.FirstOrDefaultAsync(type => type.Id == id);
         }
 
-        public async Task<IEnumerable<ContainerTypeModel>> GetContainerTypes()
+        public async Task<IEnumerable<FreigthType>> GetContainerTypes()
         {
-            return await _popAppContext.containerType.ToListAsync();
+            return await _popAppContext.FreigthType.ToListAsync();
         }
 
-        public async Task UpdateContainerType(int id, ContainerTypeModel type)
+        public async Task UpdateContainerType(int id, FreigthType type)
         {
             var updateType = await GetContainerType(id);
             if(updateType != null)

@@ -1,0 +1,24 @@
+<nz-skeleton [nzActive]="true" [nzLoading]="isLoading">
+  <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+    <mat-expansion-panel-header class="header-style">
+      <mat-panel-title class="dashboard-section-title">
+        <mat-icon>today</mat-icon>
+        Tipos de carga
+      </mat-panel-title>
+      <mat-icon *ngIf="!panelOpenState">add</mat-icon>
+      <mat-icon *ngIf="panelOpenState">remove</mat-icon>
+    </mat-expansion-panel-header>
+    <dx-pie-chart id="pie" palette="bright" [dataSource]="areas" (onPointClick)="pointClickHandler($event)"
+      (onLegendClick)="legendClickHandler($event)">
+      <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+        verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
+      <dxi-series argumentField="country" valueField="area">
+        <dxo-label [visible]="true" [customizeText]="customizeLabel" position="columns">
+          <dxo-connector [visible]="true" [width]="1"></dxo-connector>
+        </dxo-label>
+      </dxi-series>
+      <dxo-size [height]="370"></dxo-size>
+      <dxo-export [enabled]="true"></dxo-export>
+    </dx-pie-chart>
+  </mat-expansion-panel>
+</nz-skeleton>

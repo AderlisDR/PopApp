@@ -116,6 +116,7 @@ namespace PopAppAPI
             services.AddScoped<IAuthenticationServices, AuthenticationServices>();
             services.AddTransient<ILoggerServices, LoggerServices>();
             services.AddTransient<IScheduleServices, ScheduleServices>();
+            services.AddTransient<IChartServices, ChartServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

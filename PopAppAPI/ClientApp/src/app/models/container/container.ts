@@ -1,6 +1,8 @@
+import { ContainerType } from "../../enums/container-type.enum";
+
 export interface Container {
   containerId?: number;
-  containerType?: string;
+  containerType?: ContainerType;
   containerPayload?: number;
   containerCapacity?: number;
   containerLenth?: number;

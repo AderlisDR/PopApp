@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PopAppCore.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PopAppCore.Entities
@@ -7,7 +8,7 @@ namespace PopAppCore.Entities
     {
         [Key]
         public int ContainerId { get; set; }
-        public string ContainerType { get; set; }
+        public ContainerType ContainerType { get; set; }
         [Column(TypeName = "decimal(4,2)")]
         public decimal? ContainerPayload { get; set; }
         [Column(TypeName = "decimal(4,2)")]

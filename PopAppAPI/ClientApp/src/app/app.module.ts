@@ -16,14 +16,11 @@ import { StickyFooterComponent } from './layouts/site-layout/sticky-footer/stick
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { tokenGetter } from './services/functions/token-getter.function';
 import { AuthGuard } from './services/guards/auth.guard';
 import { RoleGuard } from './services/guards/role.guard';
 import { TokenInterceptor } from './shared/helpers/token-interceptor';
 import { SharedModule } from './shared/shared.module';
-
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
 
 @NgModule({
   declarations: [

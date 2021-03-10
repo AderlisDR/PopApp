@@ -16,7 +16,7 @@ namespace PopApp.Structure.Data
         public virtual DbSet<Vessel> Vessels { get; set; }
         public virtual DbSet<Logger> Loggers { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
-        public virtual DbSet<ContainerTypeModel> containerType { get; set; }
+        public virtual DbSet<FreigthType> FreigthType { get; set; }
         public virtual DbSet<ScheduleContainer> ScheduleContainers { get; set; }
         public virtual DbSet<ScheduleContainerFreigth> ScheduleContainerFreigths { get; set; }
         public virtual DbSet<ScheduleContainerFreigthProduct> ScheduleContainerFreigthProducts { get; set; }

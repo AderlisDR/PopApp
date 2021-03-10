@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PopApp.Structure.Data;
 
 namespace PopAppAPI.Migrations
 {
     [DbContext(typeof(PopAppContext))]
-    partial class PopAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210224142906_AddedContainerTypeToAEnumAndChangedFreigthTypeEntity")]
+    partial class AddedContainerTypeToAEnumAndChangedFreigthTypeEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

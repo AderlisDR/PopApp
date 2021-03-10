@@ -12,7 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxChartModule, DxDataGridModule, DxPieChartModule, DxSelectBoxModule } from 'devextreme-angular';
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ContainerFormComponent } from '../pages/container/container-form/container-form.component';
@@ -35,6 +35,29 @@ const components = [
   ExistingContainerSelectComponent
 ];
 
+const modules = [
+  CommonModule,
+  MatIconModule,
+  MatRippleModule,
+  FlexLayoutModule,
+  DxDataGridModule,
+  NgZorroAntdModule,
+  ReactiveFormsModule,
+  HttpClientModule,
+  FormsModule,
+  FontAwesomeModule,
+  MatInputModule,
+  NzIconModule,
+  MatDialogModule,
+  MatDatepickerModule,
+  DragDropModule,
+  MatChipsModule,
+  MatExpansionModule,
+  DxChartModule,
+  DxSelectBoxModule,
+  DxPieChartModule
+];
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -50,44 +73,11 @@ export const MY_FORMATS = {
 @NgModule({
   declarations: [
     ...components,
-    ...directives],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatRippleModule,
-    FlexLayoutModule,
-    DxDataGridModule,
-    NgZorroAntdModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    FontAwesomeModule,
-    MatInputModule,
-    NzIconModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    DragDropModule,
-    MatChipsModule,
-    MatExpansionModule
+    ...directives
   ],
+  imports: modules,
   exports: [
-    CommonModule,
-    MatIconModule,
-    MatRippleModule,
-    FlexLayoutModule,
-    DxDataGridModule,
-    NgZorroAntdModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    FontAwesomeModule,
-    MatInputModule,
-    NzIconModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    DragDropModule,
-    MatChipsModule,
-    MatExpansionModule,
+    ...modules,
     ...directives
   ],
   entryComponents: components,
